@@ -1,0 +1,1393 @@
+{
+	"info": {
+		"_postman_id": "11251b5b-0b9e-4183-938a-7b15220ed356",
+		"name": "MSIM new",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30134113"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "super admin",
+					"item": [
+						{
+							"name": "register admin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "admin3",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "admin3@email.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/admin/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"admin",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllAdmins",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/admin/admins",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"admin",
+										"admins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAdminById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/admin/admin/11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"admin",
+										"admin",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateAdminById",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "semaul",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "admin@mail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/admin/admin/11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"admin",
+										"admin",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteAdminById",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/admin/admin/13",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"admin",
+										"admin",
+										"13"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/admin/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTI4OTE3LCJleHAiOjE3MTUwMTUzMTd9.HNkfL5t0CtVL4Fo3nKmbLTXHXdfkIHEhuI8am1krEnM"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/admin/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/admin/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changepassword",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldPassword",
+									"value": "admin2",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/admin/changepassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"changepassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "article",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/article/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"article",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/article/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"article",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTI4OTE3LCJleHAiOjE3MTUwMTUzMTd9.HNkfL5t0CtVL4Fo3nKmbLTXHXdfkIHEhuI8am1krEnM"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_heading",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title",
+									"value": "judul",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "<h2 style=\"text-align:start;\">How it works&nbsp;</h2>\n<p style=\"text-align:start;\">Here’s what you need to know before getting started with the navbar:</p>\n<ul>\n<li>Navbars require a wrapping .navbar with .navbar-expand{-sm|-md|-lg|-xl|-xxl} for responsive collapsing and <a href=\"https://getbootstrap.com/docs/5.3/components/navbar/#color-schemes\" target=\"_self\">color scheme</a> classes.</li>\n<li>Navbars and their contents are fluid by default. Change the <a href=\"https://getbootstrap.com/docs/5.3/components/navbar/#containers\" target=\"_self\">container</a> to limit their horizontal width in different ways.</li>\n<li>Use our <a href=\"https://getbootstrap.com/docs/5.3/utilities/spacing/\" target=\"_self\">spacing</a> and <a href=\"https://getbootstrap.com/docs/5.3/utilities/flex/\" target=\"_self\">flex</a> utility classes for controlling spacing and alignment within navbars.</li>\n<li>Navbars are responsive by default, but you can easily modify them to change that. Responsive behavior depends on our Collapse JavaScript plugin.</li>\n<li>Ensure accessibility by using a &lt;nav&gt; element or, if using a more generic element such as a &lt;div&gt;, add a role=\"navigation\" to every navbar to explicitly identify it as a landmark region for users of assistive technologies.</li>\n<li>Indicate the current item by using aria-current=\"page\" for the current page or aria-current=\"true\" for the current item in a set.</li>\n<li>New in v5.2.0: Navbars can be themed with CSS variables that are scoped to the .navbar base class. .navbar-light has been deprecated and .navbar-dark has been rewritten to override CSS variables instead of adding additional styles.&nbsp;</li>\n</ul>\n",
+									"type": "text"
+								},
+								{
+									"key": "link",
+									"value": "http://www.google.co.id",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/article/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"article",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTI4OTE3LCJleHAiOjE3MTUwMTUzMTd9.HNkfL5t0CtVL4Fo3nKmbLTXHXdfkIHEhuI8am1krEnM",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_heading",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title",
+									"value": "yeah",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea odit laboriosam incidunt, ab provident obcaecati quidem, voluptatum iure optio voluptatem laudantium! Vel dolor sed molestias.",
+									"type": "text"
+								},
+								{
+									"key": "link",
+									"value": "update",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/article/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"article",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTI4OTE3LCJleHAiOjE3MTUwMTUzMTd9.HNkfL5t0CtVL4Fo3nKmbLTXHXdfkIHEhuI8am1krEnM"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/article/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"article",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "science",
+									"type": "text"
+								},
+								{
+									"key": "color",
+									"value": "purple",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/category/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "technology",
+									"type": "text"
+								},
+								{
+									"key": "color",
+									"value": "pink",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/category/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contact",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "semaul",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "maul@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "no_telp",
+									"value": "089123123123",
+									"type": "text"
+								},
+								{
+									"key": "isi_pesan",
+									"value": "siap abangkuh",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/contact/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"contact",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contact",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/contact",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"contact"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "school",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "gambar_logo_sekolah",
+									"type": "file",
+									"src": "/D:/photo webdev/tours/tour-3-2.jpg"
+								},
+								{
+									"key": "nama_sekolah",
+									"value": "SDN New York 4",
+									"type": "text"
+								},
+								{
+									"key": "alamat",
+									"value": "gang buntu no 5",
+									"type": "text"
+								},
+								{
+									"key": "embed_map",
+									"value": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d6045.433854318417!2d-73.99965305967186!3d40.74625389476988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1snew%20york%20embedded%20map!5e0!3m2!1sen!2sid!4v1716723123554!5m2!1sen!2sid\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/school/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"school",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/school",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"school"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/school/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"school",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "gambar_logo_sekolah",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "nama_sekolah",
+									"value": "SDN New York 9",
+									"type": "text"
+								},
+								{
+									"key": "alamat",
+									"value": "gang buntu no 5",
+									"type": "text"
+								},
+								{
+									"key": "embed_map",
+									"value": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d6045.433854318417!2d-73.99965305967186!3d40.74625389476988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1snew%20york%20embedded%20map!5e0!3m2!1sen!2sid!4v1716723123554!5m2!1sen!2sid\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/school/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"school",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/school/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"school",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "group",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "lor D ragon4",
+									"type": "text"
+								},
+								{
+									"key": "link",
+									"value": "google.com",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/group/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"group",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/group",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"group"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/group/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"group",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "si bolang",
+									"type": "text"
+								},
+								{
+									"key": "link",
+									"value": "bolang.com",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/group/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"group",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/group/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"group",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get group by school id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/group/school/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"group",
+								"school",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "talent",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_booklet",
+									"value": "google.com",
+									"type": "text"
+								},
+								{
+									"key": "gambar_alur_acara",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "gambar_timeline",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "link_cta",
+									"value": "google.com",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "[1,2,3]",
+									"type": "text"
+								},
+								{
+									"key": "link_join_program",
+									"value": "google.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/talent/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"talent",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get talent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/talent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"talent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update talent",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_booklet",
+									"value": "dropbox.com",
+									"type": "text"
+								},
+								{
+									"key": "gambar_alur_acara",
+									"type": "file",
+									"src": "/D:/photo webdev/users/customer-5.jpg"
+								},
+								{
+									"key": "gambar_timeline",
+									"type": "file",
+									"src": "/D:/photo webdev/users/customer-2.jpg"
+								},
+								{
+									"key": "link_cta",
+									"value": "dropbox.com",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "[1,3]",
+									"type": "text"
+								},
+								{
+									"key": "link_join_program",
+									"value": "wikipedia.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/talent/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"talent",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "mentor",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_booklet",
+									"value": "google.com",
+									"type": "text"
+								},
+								{
+									"key": "gambar_alur_acara",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "gambar_timeline",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "link_cta",
+									"value": "google.com",
+									"type": "text"
+								},
+								{
+									"key": "link_join_program",
+									"value": "facebook.com",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "[1,2,3]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/mentor/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"mentor",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get mentor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/mentor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"mentor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update mentor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_booklet",
+									"value": "dropbox.com",
+									"type": "text"
+								},
+								{
+									"key": "gambar_alur_acara",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "gambar_timeline",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "link_cta",
+									"value": "dropbox.com",
+									"type": "text"
+								},
+								{
+									"key": "link_join_program",
+									"value": "havard.com",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "[1,3]",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/mentor/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"mentor",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "parent",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_booklet",
+									"value": "google.com",
+									"type": "text"
+								},
+								{
+									"key": "gambar_alur_acara",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "gambar_timeline",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "link_cta",
+									"value": "google.com",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "[1,2,3]",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "link_join_program",
+									"value": "google.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/parent/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"parent",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get parent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/parent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"parent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update parent",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_booklet",
+									"value": "dropbox.com",
+									"type": "text"
+								},
+								{
+									"key": "gambar_alur_acara",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "gambar_timeline",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "link_cta",
+									"value": "dropbox.com",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "[1,3]",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "link_join_program",
+									"value": "havard.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/parent/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"parent",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

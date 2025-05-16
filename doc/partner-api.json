@@ -1,0 +1,237 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Partner",
+        "description": "Partner Api",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:80"
+        }
+    ],
+    "paths": {
+            "/api/partner/add": {
+                "post": {
+                    "description": "create new partner",
+                    "requestBody": {
+                        "description": "create new partner",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "nama_sekolah":{
+                                            "type": "string"
+                                        },
+                                        "gambar_sekolah": {
+                                            "type": "string"
+                                        },
+                                        "lokasi": {
+                                            "type": "string"
+                                        },
+                                        "nama_group": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "201": {
+                            "description": "Success create partner",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "data": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "nama_sekolah": {
+                                                        "type": "string"
+                                                    },
+                                                    "gambar_sekolah": {
+                                                        "type": "string"
+                                                    },
+                                                    "lokasi": {
+                                                        "type": "string"
+                                                    },
+                                                    "nama_group": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "errors": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+        "/api/partner": {
+            "get": {
+                "description": "Get list partner",
+                "responses": {
+                    "200": {
+                        "description": "Success get list partner",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "nama_sekolah": {
+                                                        "type": "string"
+                                                    },
+                                                    "gambar_sekolah": {
+                                                        "type": "string"
+                                                    },
+                                                    "lokasi": {
+                                                        "type": "string"
+                                                    },
+                                                    "nama_group": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/partner/update{id}": {
+            "put": {
+                "description": "Update partner",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "idPartner",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update existing partner",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama_sekolah": {
+                                        "type": "string"
+                                    },
+                                    "gambar_sekolah": {
+                                        "type": "string"
+                                    },
+                                    "lokasi": {
+                                        "type": "string"
+                                    },
+                                    "nama_group": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update partner success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "nama_sekolah": {
+                                                    "type": "string"
+                                                },
+                                                "gambar_sekolah": {
+                                                    "type": "string"
+                                                },
+                                                "lokasi": {
+                                                    "type": "string"
+                                                },
+                                                "nama_group": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/partner/delete/{id}": {
+            "delete": {
+                "description": "Delete partner",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "idPartner",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success delete partner",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

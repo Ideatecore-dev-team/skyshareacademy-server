@@ -1,0 +1,839 @@
+{
+	"info": {
+		"_postman_id": "1a8c953f-4c70-4b3c-8107-b4f7b3108e44",
+		"name": "MSIM api.julio.my.id",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30134113"
+	},
+	"item": [
+		{
+			"name": "superadmin",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "superadmin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "superadmin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "api.julio.my.id/superadmin/login",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"superadmin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE3MTQ5MjQzMDcsImV4cCI6MTcxNTAxMDcwN30.RaygI7XKBDxB6lljBG7lm_UvWrA_PSdaIn2SyaKt6eU",
+								"uuid": "3b09f934-0a45-49ec-8f3a-568c600f48f3",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "api.julio.my.id/superadmin/logout",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"superadmin",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "api.julio.my.id/admin/login",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InN1cGVyYWRtaW4iLCJpYXQiOjE3MTQ5MjgzOTUsImV4cCI6MTcxNTAxNDc5NX0.F1uZ3R5D3SWCx8FZ3JmZ8IDgJgL8mu1luhR2ZEGpR7s",
+								"uuid": "3f316426-7263-4ebb-a5e3-b3f38b73de84"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "admin2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin2@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "api.julio.my.id/admin/register",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"admin",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTI4ODU2LCJleHAiOjE3MTUwMTUyNTZ9.sWd_D2V2ATMPSnb-wVMHbpxOmbIJBhkg919paeNeNhA",
+								"uuid": "9ccf38de-de67-4e3c-8820-2b1edca22870"
+							}
+						],
+						"url": {
+							"raw": "api.julio.my.id/admin/logout",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"admin",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "article",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.julio.my.id/article/",
+							"protocol": "https",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"article",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.julio.my.id/article/1",
+							"protocol": "https",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"article",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTI4OTE3LCJleHAiOjE3MTUwMTUzMTd9.HNkfL5t0CtVL4Fo3nKmbLTXHXdfkIHEhuI8am1krEnM",
+								"uuid": "2abb1162-2ff1-4193-bfff-25188bb8559d"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "judul",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "category",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/photo webdev/gallery/gallery-12.jpg"
+								},
+								{
+									"key": "content",
+									"value": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea odit laboriosam incidunt, ab provident obcaecati quidem, voluptatum iure optio voluptatem laudantium! Vel dolor sed molestias.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api.julio.my.id/article/add",
+							"protocol": "https",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"article",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTI4OTE3LCJleHAiOjE3MTUwMTUzMTd9.HNkfL5t0CtVL4Fo3nKmbLTXHXdfkIHEhuI8am1krEnM",
+								"uuid": "a7ad54ab-2beb-43c0-9803-f2cced7f0d2b"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "content",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api.julio.my.id/article/1",
+							"protocol": "https",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"article",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTI4OTE3LCJleHAiOjE3MTUwMTUzMTd9.HNkfL5t0CtVL4Fo3nKmbLTXHXdfkIHEhuI8am1krEnM",
+								"uuid": "4f0fe97a-39cc-4b6a-828e-69c0d655843b"
+							}
+						],
+						"url": {
+							"raw": "https://api.julio.my.id/article/8",
+							"protocol": "https",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"article",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "mentor",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTM0NjA3LCJleHAiOjE3MTUwMjEwMDd9.sL-NKFnxwFAVJLxkG5OSunlG6e4MxHVe-F-3Pre9sRU",
+								"uuid": "b3e9ae86-423c-45f4-9cb2-8697e7a30091"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "gambar_alur_acara",
+									"type": "file",
+									"src": "/D:/photo webdev/meals/meal-1.jpg"
+								},
+								{
+									"key": "gambar_timeline",
+									"type": "file",
+									"src": "/D:/photo webdev/meals/meal-2.jpg"
+								},
+								{
+									"key": "link_cta",
+									"value": "example.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "api.julio.my.id/mentor/add",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"mentor",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.julio.my.id/mentor",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"mentor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.julio.my.id/mentor/2",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"mentor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gambar_alur_acara\": \"menyala abangku\",\r\n    \"gambar_timeline\": \"menyala abangku\",\r\n    \"link_cta\": \"menyala abangku\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.julio.my.id/mentor/1",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"mentor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0OTM0NjA3LCJleHAiOjE3MTUwMjEwMDd9.sL-NKFnxwFAVJLxkG5OSunlG6e4MxHVe-F-3Pre9sRU",
+								"uuid": "0d92f35a-cfe7-4059-88a4-d0a7a7c03953"
+							}
+						],
+						"url": {
+							"raw": "api.julio.my.id/mentor/1",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"mentor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "partner",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_sekolah",
+									"value": "nama",
+									"type": "text"
+								},
+								{
+									"key": "gambar_sekolah",
+									"type": "file",
+									"src": "/D:/photo webdev/gallery/gallery-5.jpg"
+								},
+								{
+									"key": "lokasi",
+									"value": "lokasi",
+									"type": "text"
+								},
+								{
+									"key": "nama_group",
+									"value": "namagroup",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "api.julio.my.id/partner/add",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"partner",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.julio.my.id/partner",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"partner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.julio.my.id/partner/1",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"partner",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_sekolah",
+									"value": "nama_sekolah",
+									"type": "text"
+								},
+								{
+									"key": "gambar_sekolah",
+									"type": "file",
+									"src": "/D:/photo webdev/gallery/gallery-6.jpg"
+								},
+								{
+									"key": "lokasi",
+									"value": "lokasi",
+									"type": "text"
+								},
+								{
+									"key": "nama_group",
+									"value": "nama_group",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "api.julio.my.id/partner/1",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"partner",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "api.julio.my.id/partner/2",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"partner",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "skyshare",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "gambar_alur_acara",
+									"type": "file",
+									"src": "/D:/photo webdev/gallery/gallery-5.jpg"
+								},
+								{
+									"key": "gambar_timeline",
+									"type": "file",
+									"src": "/D:/photo webdev/gallery/gallery-6.jpg"
+								},
+								{
+									"key": "link_cta",
+									"value": "example.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "api.julio.my.id/skyshare/add",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"skyshare",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.julio.my.id/skyshare/",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"skyshare",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.julio.my.id/skyshare/1",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"skyshare",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "gambar_alur_acara",
+									"type": "file",
+									"src": "/D:/photo webdev/gallery/gallery-10.jpg"
+								},
+								{
+									"key": "gambar_timeline",
+									"type": "file",
+									"src": "/D:/photo webdev/gallery/gallery-11.jpg"
+								},
+								{
+									"key": "link_cta",
+									"value": "example.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "api.julio.my.id/skyshare/1",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"skyshare",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "api.julio.my.id/skyshare/1",
+							"host": [
+								"api",
+								"julio",
+								"my",
+								"id"
+							],
+							"path": [
+								"skyshare",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

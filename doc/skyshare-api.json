@@ -1,0 +1,231 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Skyshare-api",
+        "description": "Skyshare",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:80"
+        }
+    ],
+    "paths": {
+        "/api/skyshare/add": {
+            "post": {
+                "description": "Add new skyshare",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "gambar_alur_acara": {
+                                        "type": "string"
+                                    },
+                                    "acara": {
+                                        "type": "string"
+                                    },
+                                    "gambar_timeline": {
+                                        "type": "string"
+                                    },
+                                    "link_cta": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success add skyshare",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "gambr_alur_acara": {
+                                                    "type": "string"
+                                                },
+                                                "gambar_timeline": {
+                                                    "type": "string"
+                                                },
+                                                "link_cta": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/skyshare": {
+            "get": {
+                "description": "Get list skyshare",
+                "responses": {
+                    "200": {
+                        "description": "Success get skyshare",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "gambar_alur-carita": {
+                                                        "type": "string"
+                                                    },
+                                                    "gambar_timeline": {
+                                                        "type": "string"
+                                                    },
+                                                    "link_cta": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+
+                                        "errors": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/skyshare/update/{id}": {
+            "put": {
+                "description": "Update existing skyshare",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "idSkyshare",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update skyshare",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "gambar_alur_acara": {
+                                        "type": "string"
+                                    },
+                                    "gambar_timeline": {
+                                        "type": "string"
+                                    },
+                                    "link_cta": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success update skyshare",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "gambar_alur_acara": {
+                                                    "type": "string"
+                                                },
+                                                "gambar_timeline": {
+                                                    "type": "string"
+                                                },
+                                                "link_cta": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/skyshare/delete/{id}": {
+            "delete": {
+                "description": "Delete skyshare",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "idSkyshare",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success delete skyshare",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
