@@ -21,9 +21,32 @@ const mentorRoute = require("../api/mentor/route");
 const parentRoute = require("../api/parent/route");
 
 const app = express();
-app.use(cors());
-app.use(cookieParser());
 
+// Konfigurasi CORS
+const allowedOrigins = [
+  "https://dev.skyshareacademy.id",
+  "https://skyshareacademy.id",
+  "http://localhost:5173", // Gunakan http:// untuk localhost jika tidak menggunakan https
+  "http://localhost:5174", // Gunakan http:// untuk localhost jika tidak menggunakan https
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Izinkan permintaan tanpa origin (misalnya, permintaan dari Postman atau curl)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "Kebijakan CORS untuk situs ini tidak mengizinkan akses dari origin yang ditentukan.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true, // Penting jika Anda menggunakan cookie atau sesi
+  })
+);
+
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -31,8 +54,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // delay
 // app.use(async (req, res, next) => {
-//   await new Promise((resolve) => setTimeout(resolve, 3000));
-//   next();
+//     await new Promise((resolve) => setTimeout(resolve, 3000));
+//     next();
 // });
 
 app.get("/", (req, res) => {
