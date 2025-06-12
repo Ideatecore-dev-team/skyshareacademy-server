@@ -43,8 +43,22 @@ app.use(
       return callback(null, true);
     },
     credentials: true, // Penting jika Anda menggunakan cookie atau sesi
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
+
+// Tambahan header CORS untuk memastikan
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 app.use(cookieParser());
 app.use(express.json());
