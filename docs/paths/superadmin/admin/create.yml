@@ -1,0 +1,58 @@
+post:
+  tags:
+    - Super Admin - Admin Management
+  summary: Create Admin endpoint
+  description: Endpoint to create new Admin
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+            - password
+            - name
+          properties:
+            email:
+              type: string
+              format: email
+            password:
+              type: string
+              minLength: 8
+            name:
+              type: string
+        example:
+          email: user@example.com
+          password: securePassword123
+          name: John Doe
+
+  responses:
+    "201":
+      description: Success create new admin
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  admin:
+                    type: object
+                    $ref: "../../../components/schemas/Admin.yml#/Admin"
+              message:
+                type: string
+                example: Success create new admin
+              success:
+                type: boolean
+                example: true
+                
+    "401":
+      $ref: "../../../components/responses/Unauthorized.yml"
+    "409":
+      $ref: "../../../components/responses/ConflictError.yml"
+    "422":
+      $ref: "../../../components/responses/ValidationError.yml"
+    "500":
+      $ref: "../../../components/responses/InternalServerError.yml"

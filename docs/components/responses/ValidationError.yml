@@ -1,0 +1,27 @@
+description: Validation failed
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        errors:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Validation failed
+        data:
+          type: object
+          properties:
+            email:
+              type: string
+              example: [Required]
+            password:
+              type: string
+              example: [Required]
+            name:
+              type: string
+              example: Required

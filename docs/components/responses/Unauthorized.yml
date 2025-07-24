@@ -1,0 +1,15 @@
+description: Unauthorized request
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        errors:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Unauthorized

@@ -1,0 +1,533 @@
+openapi: 3.0.3
+info:
+  title: MSIM api documentation
+  version: 1.0.0
+  description: Documentation API for MSIM web app
+servers:
+  - url: 'http://localhost:3000'
+    description: Local development server
+paths:
+  /:
+    get:
+      tags:
+        - Root Endpoint
+      summary: App endpoint
+      description: The main endpoint to verify that the server is running properly.
+      responses:
+        '200':
+          description: Server berjalan dengan normal dan mengembalikan pesan sambutan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+                  message:
+                    type: string
+                    example: hello MSIM sekai
+                  success:
+                    type: boolean
+                    example: true
+  /login:
+    post:
+      tags:
+        - Public
+      summary: Login endpoint
+      description: Authenticate user with email and password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  example: securePassword123
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                  message:
+                    type: string
+                    example: Success login
+                  success:
+                    type: boolean
+                    example: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /logout:
+    post:
+      tags:
+        - Public
+      summary: Logout endpoint
+      description: Clear authentication cookie and logout the user.
+      responses:
+        '200':
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: Success logout
+                  success:
+                    type: boolean
+                    example: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /superadmin/admin/create:
+    post:
+      tags:
+        - Super Admin - Admin Management
+      summary: Create Admin endpoint
+      description: Endpoint to create new Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - name
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 8
+                name:
+                  type: string
+            example:
+              email: user@example.com
+              password: securePassword123
+              name: John Doe
+      responses:
+        '201':
+          description: Success create new admin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      admin:
+                        type: object
+                        $ref: '#/components/schemas/Admin'
+                  message:
+                    type: string
+                    example: Success create new admin
+                  success:
+                    type: boolean
+                    example: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/ConflictError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /superadmin/admin:
+    get:
+      tags:
+        - Super Admin - Admin Management
+      summary: Get admin data endpoint
+      description: Endpoint to get admin data
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 10
+            example: 10
+      responses:
+        '200':
+          description: A list of admin users with pagination metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      admins:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Admin'
+                      pagination:
+                        type: object
+                        properties:
+                          totalItems:
+                            type: integer
+                            example: 15
+                          totalPages:
+                            type: integer
+                            example: 2
+                          currentPage:
+                            type: integer
+                            example: 2
+                          pageSize:
+                            type: integer
+                            example: 10
+                          totalItemCurrentPage:
+                            type: integer
+                            example: 5
+                  message:
+                    type: string
+                    example: Success get admin data
+                  success:
+                    type: boolean
+                    example: true
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/superadmin/admin/{adminId}':
+    get:
+      tags:
+        - Super Admin - Admin Management
+      summary: Get data admin by id endpoint
+      description: endpoint to get data admin by id
+      parameters:
+        - name: adminId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: cmd61m4hq0000tav0q17flh1k
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      admin:
+                        type: object
+                        $ref: '#/components/schemas/Admin'
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    put:
+      tags:
+        - Super Admin - Admin Management
+      summary: Update data admin by id endpoint
+      description: endpoint to update data admin by id
+      parameters:
+        - name: adminId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: cmd61m4hq0000tav0q17flh1k
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: John Doe update
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      admin:
+                        type: object
+                        $ref: '#/components/schemas/Admin'
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      tags:
+        - Super Admin - Admin Management
+      summary: Romove admin by id endpoint
+      description: description
+      parameters:
+        - name: adminId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: cmd61m4hq0000tav0q17flh1k
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      admin:
+                        type: object
+                        $ref: '#/components/schemas/Admin'
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  '/superadmin/admin/{adminId}/resetpassword':
+    put:
+      tags:
+        - Super Admin - Admin Management
+      summary: Reset password admin by id endpoint
+      description: description . . .
+      parameters:
+        - name: adminId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: cmd61m4hq0000tav0q17flh1k
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - newPassword
+              properties:
+                newPassword:
+                  type: string
+                  example: updateSecurePassword123
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      admin:
+                        type: object
+                        $ref: '#/components/schemas/Admin'
+                  message:
+                    type: string
+                  success:
+                    type: boolean
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+components:
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              errors:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: Bad Request
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              errors:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: Not Found
+    ConflictError:
+      description: 'Conflict error (e.g., Data already exists)'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              errors:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: Data already exists
+    Unauthorized:
+      description: Unauthorized request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              errors:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: Unauthorized
+    ValidationError:
+      description: Validation failed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              errors:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: Validation failed
+              data:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    example:
+                      - Required
+                  password:
+                    type: string
+                    example:
+                      - Required
+                  name:
+                    type: string
+                    example: Required
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              errors:
+                type: boolean
+                example: true
+              message:
+                type: string
+                example: Internal Server Error
+  schemas:
+    Admin:
+      type: object
+      properties:
+        id:
+          type: string
+          example: cmd61m4hq0000tav0q17flh1k
+        createdAt:
+          type: string
+          format: date-time
+          example: '2025-06-18T03:12:00.295Z'
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2025-06-18T03:12:00.295Z'
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        name:
+          type: string
+          example: John Doe
+        role:
+          type: string
+          example: ADMIN
+tags:
+  - name: Root Endpoint
+    description: The main endpoint to verify that the server is running properly.
+  - name: Public
+    description: 'Endpoints accessible without authentication, such as login and registration.'

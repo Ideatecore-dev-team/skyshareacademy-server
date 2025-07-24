@@ -1,0 +1,26 @@
+# components/schemas/Admin.yml
+Admin:
+  type: object
+  properties:
+    id:
+      type: string
+      example: cmd61m4hq0000tav0q17flh1k
+    createdAt:
+      type: string
+      format: date-time
+      example: 2025-06-18T03:12:00.295Z
+    updatedAt:
+      type: string
+      format: date-time
+      example: 2025-06-18T03:12:00.295Z
+    email:
+      type: string
+      format: email
+      example: user@example.com
+    name:
+      type: string
+      example: John Doe
+    role:
+      type: string
+      example: ADMIN
+

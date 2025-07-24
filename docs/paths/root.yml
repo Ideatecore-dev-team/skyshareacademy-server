@@ -1,0 +1,23 @@
+get:
+  tags:
+    - Root Endpoint
+  summary: App endpoint
+  description: The main endpoint to verify that the server is running properly.
+  responses:
+    "200":
+      description: Server berjalan dengan normal dan mengembalikan pesan sambutan.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+                nullable: true
+                example: null
+              message:
+                type: string
+                example: hello MSIM sekai
+              success:
+                type: boolean
+                example: true

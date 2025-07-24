@@ -1,0 +1,121 @@
+get:
+  tags:
+    - Super Admin - Admin Management
+  summary: Get data admin by id endpoint
+  description: endpoint to get data admin by id
+  parameters: 
+    - name : adminId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: cmd61m4hq0000tav0q17flh1k
+  responses:
+    "200":
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  admin:
+                    type: object
+                    $ref: "../../../components/schemas/Admin.yml#/Admin"
+
+              message:
+                type: string
+              success:
+                type: boolean
+
+    "404":
+      $ref: "../../../components/responses/NotFound.yml"    
+    "422":
+      $ref: "../../../components/responses/ValidationError.yml"
+
+put:
+  tags:
+    - Super Admin - Admin Management
+  summary: Update data admin by id endpoint
+  description: endpoint to update data admin by id
+  parameters:
+    - name : adminId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: cmd61m4hq0000tav0q17flh1k
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              example: John Doe update
+  responses:
+    "200":
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  admin:
+                    type: object
+                    $ref: "../../../components/schemas/Admin.yml#/Admin"
+
+              message:
+                type: string
+              success:
+                type: boolean
+
+    "404":
+      $ref: "../../../components/responses/NotFound.yml"    
+    "422":
+      $ref: "../../../components/responses/ValidationError.yml"
+
+delete:
+  tags:
+    - Super Admin - Admin Management
+  summary: Romove admin by id endpoint
+  description: description
+  parameters:
+    - name : adminId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: cmd61m4hq0000tav0q17flh1k
+  responses:
+    "200":
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  admin:
+                    type: object
+                    $ref: "../../../components/schemas/Admin.yml#/Admin"
+              message:
+                type: string
+              success:
+                type: boolean
+
+    "404":
+      $ref: "../../../components/responses/NotFound.yml"    
+    "422":
+      $ref: "../../../components/responses/ValidationError.yml"

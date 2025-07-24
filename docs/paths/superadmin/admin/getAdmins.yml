@@ -1,0 +1,63 @@
+get:
+  tags:
+    - Super Admin - Admin Management
+  summary: Get admin data endpoint
+  description: Endpoint to get admin data
+  parameters: 
+    - name: page
+      in: query
+      required: false
+      schema: 
+        type: integer
+        minimum: 1
+        example: 1
+    - name: size
+      in: query
+      required: false
+      schema: 
+        type: integer
+        minimum: 10
+        example: 10
+  responses:
+    "200":
+      description: A list of admin users with pagination metadata
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  admins:
+                    type: array
+                    items:
+                      $ref: "../../../components/schemas/Admin.yml#/Admin"
+                  pagination:
+                    type: object
+                    properties:
+                      totalItems:
+                        type: integer
+                        example: 15
+                      totalPages:
+                        type: integer
+                        example: 2
+                      currentPage:
+                        type: integer
+                        example: 2
+                      pageSize:
+                        type: integer
+                        example: 10
+                      totalItemCurrentPage:
+                        type: integer
+                        example: 5
+              message:
+                type: string
+                example: Success get admin data
+              success:
+                type: boolean
+                example: true
+
+    "404": 
+      $ref: "../../../components/responses/NotFound.yml"
+

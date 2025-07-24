@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: MSIM api documentation
+  version: 1.0.0
+  description: Documentation API for MSIM web app
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+paths:
+# public route
+  /:
+    $ref: "./paths/root.yml"  
+  /login:
+   $ref: "./paths/auth/login.yml"   
+  /logout:
+    $ref: "./paths/auth/logout.yml"   
+# super admin route
+  /superadmin/admin/create:
+    $ref: "./paths/superadmin/admin/create.yml"
+  /superadmin/admin:
+    $ref: "./paths/superadmin/admin/getAdmins.yml"
+  /superadmin/admin/{adminId}:
+    $ref: "./paths/superadmin/admin/adminById.yml"
+  /superadmin/admin/{adminId}/resetpassword:
+    $ref: "./paths/superadmin/admin/resetpassword.yml"
+    
+components:
+  responses:
+    BadRequest:
+      $ref: "./components/responses/BadRequest.yml"
+    NotFound:
+      $ref: "./components/responses/NotFound.yml"
+    ConflictError:
+      $ref: "./components/responses/ConflictError.yml"
+    Unauthorized:
+      $ref: "./components/responses/Unauthorized.yml"
+    ValidationError:
+      $ref: "./components/responses/ValidationError.yml"
+    InternalServerError:
+      $ref: "./components/responses/InternalServerError.yml"
+
+  schemas:
+    Admin:
+      $ref: "./components/schemas/Admin.yml#/Admin"
+   
+
+tags:
+  - name: Root Endpoint
+    description: The main endpoint to verify that the server is running properly.
+  - name: Public
+    description: Endpoints accessible without authentication, such as login and registration.
+ 
+

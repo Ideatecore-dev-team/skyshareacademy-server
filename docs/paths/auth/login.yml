@@ -1,0 +1,49 @@
+post:
+  tags:
+    - Public
+  summary: Login endpoint
+  description: Authenticate user with email and password.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+              format: email
+              example: user@example.com
+            password:
+              type: string
+              format: password
+              example: securePassword123
+  responses:
+    "200":
+      description: Login successful
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+              message:
+                type: string
+                example: Success login
+              success:
+                type: boolean
+                example: true
+    "401":
+      $ref: "../../components/responses/Unauthorized.yml"
+    "422": 
+      $ref: "../../components/responses/ValidationError.yml"
+    "500":
+      $ref: "../../components/responses/InternalServerError.yml"
