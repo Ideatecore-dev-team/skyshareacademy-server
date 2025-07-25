@@ -35,7 +35,6 @@ adminRouter.put(
 );
 
 // reset password by id
-
 adminRouter.put(
   "/:adminId/resetpassword",
   validate.params(AdminSchema.adminId),
