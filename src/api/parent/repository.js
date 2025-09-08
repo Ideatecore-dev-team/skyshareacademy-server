@@ -21,11 +21,7 @@ const createParentSchool = async (data) => {
 };
 
 const getAllParentSchool = async () => {
-  const result = await db("parent_school").select([
-    "id",
-    "parent_id",
-    "school_id",
-  ]);
+  const result = await db("parent_school").select(["id", "parent_id", "school_id"]);
   return result;
 };
 

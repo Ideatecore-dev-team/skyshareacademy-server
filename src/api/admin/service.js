@@ -29,7 +29,7 @@ const login = async (request) => {
 
   const isPasswordValid = await bcrypt.compare(
     validData.password,
-    admin[0].password
+    admin[0].password,
   );
 
   if (!isPasswordValid) {
@@ -61,7 +61,7 @@ const changePassword = async (request) => {
 
   const isPasswordValid = await bcrypt.compare(
     validData.oldPassword,
-    superadmin[0].password
+    superadmin[0].password,
   );
 
   if (!isPasswordValid) {
@@ -70,10 +70,7 @@ const changePassword = async (request) => {
 
   const hashedPassword = await bcrypt.hash(validData.newPassword, 10);
 
-  const result = await repository.updateAdminPassword(
-    validData.id,
-    hashedPassword
-  );
+  const result = await repository.updateAdminPassword(validData.id, hashedPassword);
 
   return result;
 };

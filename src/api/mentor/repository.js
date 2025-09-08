@@ -21,11 +21,7 @@ const createMentorSchool = async (data) => {
 };
 
 const getAllMentorSchool = async () => {
-  const result = await db("mentor_school").select([
-    "id",
-    "mentor_id",
-    "school_id",
-  ]);
+  const result = await db("mentor_school").select(["id", "mentor_id", "school_id"]);
   return result;
 };
 

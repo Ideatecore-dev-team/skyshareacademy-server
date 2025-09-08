@@ -29,7 +29,7 @@ const getAll = async () => {
       "category.name as category_name",
       "category.color as category_color",
       "article.createdAt",
-      "article.updatedAt"
+      "article.updatedAt",
     )
     .orderBy("article.createdAt", "desc");
   // .limit(6)
@@ -55,7 +55,7 @@ const getById = async (data) => {
       "category.name as category_name",
       "category.color as category_color",
       "article.createdAt",
-      "article.updatedAt"
+      "article.updatedAt",
     );
   return result[0];
 };

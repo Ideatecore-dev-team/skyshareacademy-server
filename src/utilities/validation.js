@@ -6,10 +6,7 @@ const validate = (request, schema) => {
     allowUnknown: false,
   });
   if (result.error) {
-    throw new ResponseError(
-      403,
-      `error validation ${result.error.message}`
-    );
+    throw new ResponseError(403, `error validation ${result.error.message}`);
   } else {
     return result.value;
   }

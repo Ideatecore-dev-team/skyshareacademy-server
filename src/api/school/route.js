@@ -14,7 +14,7 @@ router.post(
   auth.authenticate,
   auth.isAdmin,
   upload.school,
-  controller.create
+  controller.create,
 );
 
 // @desc    Get all school
@@ -35,7 +35,7 @@ router.put(
   auth.authenticate,
   auth.isAdmin,
   upload.school,
-  controller.update
+  controller.update,
 );
 
 // @desc    Delete school
@@ -45,7 +45,7 @@ router.delete(
   `${endpoint}/:schoolId`,
   auth.authenticate,
   auth.isAdmin,
-  controller.remove
+  controller.remove,
 );
 
 module.exports = router;

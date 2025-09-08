@@ -17,6 +17,7 @@ const groupRoute = require("../api/group/route");
 const talentRoute = require("../api/talent/route");
 const mentorRoute = require("../api/mentor/route");
 const parentRoute = require("../api/parent/route");
+const eventRoute = require("../api/event/router");
 
 const app = express();
 
@@ -29,7 +30,7 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: function (origin, callback) {
+    origin: (origin, callback) => {
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) === -1) {
         const msg =
@@ -41,14 +42,14 @@ app.use(
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  }),
 );
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.send("Hello World Sekai!");
 });
 
@@ -63,8 +64,9 @@ app.use(groupRoute);
 app.use(mentorRoute);
 app.use(talentRoute);
 app.use(parentRoute);
+app.use(eventRoute);
 
-app.use("*", (req, res, next) => {
+app.use("*", (req, _, next) => {
   const endpoint = req.originalUrl;
   next(new ResponseError(404, `${endpoint} endpoint not found!`));
 });

@@ -9,22 +9,12 @@ const endpoint = "/category";
 // @desc    Create category
 // @route   POST /category/add
 // @access  Private/admin
-router.post(
-  `${endpoint}/add`,
-  auth.authenticate,
-  auth.isAdmin,
-  controller.create
-);
+router.post(`${endpoint}/add`, auth.authenticate, auth.isAdmin, controller.create);
 
 // @desc    Get all category
 // @route   GET /category
 // @access  Private/admin
-router.get(
-  `${endpoint}`,
-  auth.authenticate,
-  auth.isAdmin,
-  controller.getAll
-);
+router.get(`${endpoint}`, auth.authenticate, auth.isAdmin, controller.getAll);
 
 // @desc    Get category by id
 // @route   GET /category/:categoryId
@@ -33,7 +23,7 @@ router.get(
   `${endpoint}/:categoryId`,
   auth.authenticate,
   auth.isAdmin,
-  controller.getById
+  controller.getById,
 );
 
 // @desc    Update category
@@ -43,7 +33,7 @@ router.put(
   `${endpoint}/:categoryId`,
   auth.authenticate,
   auth.isAdmin,
-  controller.update
+  controller.update,
 );
 
 // @desc    Delete category
@@ -53,7 +43,7 @@ router.delete(
   `${endpoint}/:categoryId`,
   auth.authenticate,
   auth.isAdmin,
-  controller.remove
+  controller.remove,
 );
 
 module.exports = router;

@@ -17,7 +17,7 @@ router.post(`${endpoint}/login`, controller.login);
 router.put(
   `${endpoint}/changepassword`,
   auth.authenticate,
-  controller.changePassword
+  controller.changePassword,
 );
 
 // @desc    Logout admin
@@ -32,7 +32,7 @@ router.post(
   `${endpoint}/register`,
   auth.authenticate,
   auth.isSuperAdmin,
-  controller.register
+  controller.register,
 );
 
 // @desc    Get all admins
@@ -42,7 +42,7 @@ router.get(
   `${endpoint}/admins`,
   auth.authenticate,
   auth.isSuperAdmin,
-  controller.getAdmins
+  controller.getAdmins,
 );
 
 // @desc    Get admin by id
@@ -52,7 +52,7 @@ router.get(
   `${endpoint}/admin/:adminId`,
   auth.authenticate,
   auth.isSuperAdmin,
-  controller.getAdminById
+  controller.getAdminById,
 );
 
 // @desc    Update admin
@@ -62,7 +62,7 @@ router.put(
   `${endpoint}/admin/:adminId`,
   auth.authenticate,
   auth.isSuperAdmin,
-  controller.updateAdminById
+  controller.updateAdminById,
 );
 
 // @desc    Delete admin
@@ -72,7 +72,7 @@ router.delete(
   `${endpoint}/admin/:adminId`,
   auth.authenticate,
   auth.isSuperAdmin,
-  controller.deleteAdminById
+  controller.deleteAdminById,
 );
 
 // for checking only, must delete or comment when in production

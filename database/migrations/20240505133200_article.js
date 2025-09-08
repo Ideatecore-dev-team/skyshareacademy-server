@@ -16,11 +16,7 @@ exports.up = function (knex) {
       .inTable("admin")
       .onDelete("cascade")
       .onUpdate("cascade");
-    table
-      .integer("category_id")
-      .unsigned()
-      .references("id")
-      .inTable("category");
+    table.integer("category_id").unsigned().references("id").inTable("category");
     table.timestamp("createdAt").defaultTo(knex.fn.now());
     table.timestamp("updatedAt").defaultTo(knex.fn.now());
   });

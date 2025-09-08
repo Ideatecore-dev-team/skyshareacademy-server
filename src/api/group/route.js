@@ -8,12 +8,7 @@ const endpoint = "/group";
 // @desc    Create group
 // @route   POST /group/add
 // @access  Private/admin
-router.post(
-  `${endpoint}/add`,
-  auth.authenticate,
-  auth.isAdmin,
-  controller.create
-);
+router.post(`${endpoint}/add`, auth.authenticate, auth.isAdmin, controller.create);
 
 // @desc    Get all group
 // @route   GET /group
@@ -32,7 +27,7 @@ router.put(
   `${endpoint}/:groupId`,
   auth.authenticate,
   auth.isAdmin,
-  controller.update
+  controller.update,
 );
 
 // @desc    Delete group
@@ -42,7 +37,7 @@ router.delete(
   `${endpoint}/:groupId`,
   auth.authenticate,
   auth.isAdmin,
-  controller.remove
+  controller.remove,
 );
 
 // @desc    Get group by school_id

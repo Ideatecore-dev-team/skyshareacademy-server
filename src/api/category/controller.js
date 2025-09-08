@@ -19,7 +19,7 @@ const create = async (req, res, next) => {
   }
 };
 
-const getAll = async (req, res, next) => {
+const getAll = async (_, res, next) => {
   try {
     const response = await service.getAll();
     res.status(200).json({

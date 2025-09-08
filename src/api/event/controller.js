@@ -1,26 +1,27 @@
 const service = require("./service");
 
+const defaultImage = "https://picsum.photos/300/300";
+
 const create = async (req, res, next) => {
   try {
     let imagePath;
+
     if (
       !req.files ||
-      !req.files.image_heading ||
-      req.files.image_heading.length === 0
+      !req.files.event_image_url ||
+      req.files.event_image_url.length === 0
     ) {
-      imagePath =
-        "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
+      imagePath = defaultImage;
     } else {
-      imagePath = req.files.image_heading[0].path;
+      imagePath = req.files.event_image_url[0].path;
     }
 
     const request = {
-      image_heading: imagePath,
-      title: req.body.title,
-      content: req.body.content,
-      link: req.body.link,
-      admin_id: Number(req.user.id),
-      category_id: Number(req.body.category_id),
+      event_image_url: imagePath,
+      nama_event: req.body.nama_event,
+      kategori: req.body.kategori,
+      total_peserta: Number(req.body.total_peserta),
+      deskripsi: req.body.deskripsi,
     };
 
     const response = await service.create(request);
@@ -50,8 +51,9 @@ const getAll = async (_, res, next) => {
 const getById = async (req, res, next) => {
   try {
     const request = {
-      id: req.params.articleId,
+      id: req.params.eventId,
     };
+
     const response = await service.getById(request);
     res.status(200).json({
       data: response,
@@ -66,26 +68,26 @@ const getById = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     let imagePath;
+
     if (
       !req.files ||
-      !req.files.image_heading ||
-      req.files.image_heading.length === 0
+      !req.files.event_image_url ||
+      req.files.event_image_url.length === 0
     ) {
-      imagePath =
-        "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
+      imagePath = defaultImage;
     } else {
-      imagePath = req.files.image_heading[0].path;
+      imagePath = req.files.event_image_url[0].path;
     }
 
     const request = {
-      id: req.params.articleId,
-      image_heading: imagePath,
-      title: req.body.title,
-      content: req.body.content,
-      link: req.body.link,
-      admin_id: Number(req.user.id),
-      category_id: Number(req.body.category_id),
+      id: req.params.eventId,
+      event_image_url: imagePath,
+      nama_event: req.body.nama_event,
+      kategori: req.body.kategori,
+      total_peserta: Number(req.body.total_peserta),
+      deskripsi: req.body.deskripsi,
     };
+
     const response = await service.update(request);
     res.status(200).json({
       data: response,
@@ -100,9 +102,9 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     const request = {
-      id: req.params.articleId,
-      admin_id: req.user.id,
+      id: req.params.eventId,
     };
+
     const response = await service.remove(request);
     res.status(200).json({
       data: response,

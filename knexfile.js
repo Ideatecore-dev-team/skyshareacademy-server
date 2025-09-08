@@ -1,7 +1,8 @@
 const dotenv = require("dotenv");
+const ENV = require("./src/configs/env.validation");
 dotenv.config();
 
-const databaseUrl = process.env.DATABASE_URL;
+const databaseUrl = ENV.DATABASE_URL;
 // console.log(databaseUrl);
 // Update with your config settings.
 

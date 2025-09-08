@@ -14,11 +14,6 @@ router.post(`${endpoint}/add`, controller.create);
 // @desc    Get all category
 // @route   GET /contact/add
 // @access  Private/admin
-router.get(
-  `${endpoint}`,
-  auth.authenticate,
-  auth.isAdmin,
-  controller.getAll
-);
+router.get(`${endpoint}`, auth.authenticate, auth.isAdmin, controller.getAll);
 
 module.exports = router;

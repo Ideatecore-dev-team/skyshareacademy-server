@@ -14,7 +14,7 @@ router.post(
   auth.authenticate,
   auth.isAdmin,
   upload.parent,
-  controller.create
+  controller.create,
 );
 
 // @desc    Get all parent
@@ -30,7 +30,7 @@ router.put(
   auth.authenticate,
   auth.isAdmin,
   upload.parent,
-  controller.update
+  controller.update,
 );
 
 module.exports = router;

@@ -14,7 +14,7 @@ router.post(
   auth.authenticate,
   auth.isAdmin,
   upload.mentor,
-  controller.create
+  controller.create,
 );
 
 // @desc    Get all mentor
@@ -30,7 +30,7 @@ router.put(
   auth.authenticate,
   auth.isAdmin,
   upload.mentor,
-  controller.update
+  controller.update,
 );
 
 module.exports = router;

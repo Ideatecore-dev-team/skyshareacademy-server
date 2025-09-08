@@ -4,28 +4,35 @@ const upload = require("../../utilities/uploadCloudinary");
 const controller = require("./controller");
 
 const router = express.Router();
-const endpoint = "/article";
+const endpoint = "/event";
+
+// router.get(`${endpoint}`, (_, res) => {
+//   res.send("hello event");
+// });
 
 router.post(
   `${endpoint}/add`,
-  auth.authenticate,
-  auth.isAdmin,
-  upload.article,
+  //   auth.authenticate,
+  //   auth.isAdmin,
+  upload.event,
   controller.create,
 );
+
 router.get(`${endpoint}`, controller.getAll);
-router.get(`${endpoint}/:articleId`, controller.getById);
+router.get(`${endpoint}/:eventId`, controller.getById);
+
 router.put(
-  `${endpoint}/:articleId`,
-  auth.authenticate,
-  auth.isAdmin,
-  upload.article,
+  `${endpoint}/:eventId`,
+  //   auth.authenticate,
+  //   auth.isAdmin,
+  upload.event,
   controller.update,
 );
+
 router.delete(
-  `${endpoint}/:articleId`,
-  auth.authenticate,
-  auth.isAdmin,
+  `${endpoint}/:eventId`,
+  //   auth.authenticate,
+  //   auth.isAdmin,
   controller.remove,
 );
 

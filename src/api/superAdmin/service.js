@@ -8,9 +8,7 @@ const ResponseError = require("../../error/ResponseError");
 const login = async (request) => {
   const validData = validate(request, schema.login);
 
-  const superadmin = await repository.findSuperAdminByUsername(
-    validData.username
-  );
+  const superadmin = await repository.findSuperAdminByUsername(validData.username);
 
   if (!superadmin.length > 0) {
     throw new ResponseError(401, "username or password is wrong");
@@ -18,7 +16,7 @@ const login = async (request) => {
 
   const isPasswordValid = await bcrypt.compare(
     validData.password,
-    superadmin[0].password
+    superadmin[0].password,
   );
 
   if (!isPasswordValid) {
@@ -49,7 +47,7 @@ const changePassword = async (request) => {
 
   const isPasswordValid = await bcrypt.compare(
     validData.oldPassword,
-    superadmin[0].password
+    superadmin[0].password,
   );
 
   if (!isPasswordValid) {
@@ -60,7 +58,7 @@ const changePassword = async (request) => {
 
   const result = await repository.updateSuperAdminPassword(
     validData.id,
-    hashedPassword
+    hashedPassword,
   );
 
   return result;

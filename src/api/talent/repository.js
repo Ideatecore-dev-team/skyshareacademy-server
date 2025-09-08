@@ -21,11 +21,7 @@ const createTalentSchool = async (data) => {
 };
 
 const getAllTalentSchool = async () => {
-  const result = await db("talent_school").select([
-    "id",
-    "talent_id",
-    "school_id",
-  ]);
+  const result = await db("talent_school").select(["id", "talent_id", "school_id"]);
   return result;
 };
 

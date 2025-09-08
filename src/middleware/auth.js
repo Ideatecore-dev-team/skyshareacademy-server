@@ -7,10 +7,7 @@ const isSuperAdmin = (req, res, next) => {
   if (req.user && req.user.role === "superadmin") {
     next();
   } else {
-    throw new ResponseError(
-      401,
-      "Unauthorized: Requires superadmin privileges"
-    );
+    throw new ResponseError(401, "Unauthorized: Requires superadmin privileges");
   }
 };
 
@@ -18,10 +15,7 @@ const isAdmin = (req, res, next) => {
   if (req.user && req.user.role === "admin") {
     next();
   } else {
-    throw new ResponseError(
-      401,
-      "Unauthorized: Requires admin privileges"
-    );
+    throw new ResponseError(401, "Unauthorized: Requires admin privileges");
   }
 };
 

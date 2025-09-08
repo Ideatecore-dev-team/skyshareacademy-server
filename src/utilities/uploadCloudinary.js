@@ -50,6 +50,10 @@ const talent = multer({ storage: createStorage("talent") }).fields([
   { name: "gambar_timeline" },
 ]);
 
+const event = multer({ storage: createStorage("event") }).fields([
+  { name: "event_image_url" },
+]);
+
 module.exports = {
   partner,
   article,
@@ -58,4 +62,5 @@ module.exports = {
   school,
   parent,
   talent,
+  event
 };

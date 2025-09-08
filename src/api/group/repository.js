@@ -36,10 +36,7 @@ const update = async (data) => {
 };
 
 const remove = async (data) => {
-  const result = await db("group")
-    .delete()
-    .where({ id: data.id })
-    .returning(["*"]);
+  const result = await db("group").delete().where({ id: data.id }).returning(["*"]);
   return result[0];
 };
 

@@ -11,7 +11,7 @@ router.post(
   auth.authenticate,
   auth.isAdmin,
   upload.skyshare,
-  controller.create
+  controller.create,
 );
 router.get(`${endpoint}`, controller.getAll);
 router.get(`${endpoint}/:skyshareId`, controller.getById);
@@ -20,13 +20,13 @@ router.put(
   auth.authenticate,
   auth.isAdmin,
   upload.skyshare,
-  controller.update
+  controller.update,
 );
 router.delete(
   `${endpoint}/:skyshareId`,
   auth.authenticate,
   auth.isAdmin,
-  controller.remove
+  controller.remove,
 );
 
 module.exports = router;
