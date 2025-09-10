@@ -6,14 +6,10 @@ const controller = require("./controller");
 const router = express.Router();
 const endpoint = "/event";
 
-// router.get(`${endpoint}`, (_, res) => {
-//   res.send("hello event");
-// });
-
 router.post(
   `${endpoint}/add`,
-  //   auth.authenticate,
-  //   auth.isAdmin,
+  auth.authenticate,
+  auth.isAdmin,
   upload.event,
   controller.create,
 );
@@ -23,16 +19,17 @@ router.get(`${endpoint}/:eventId`, controller.getById);
 
 router.put(
   `${endpoint}/:eventId`,
-  //   auth.authenticate,
-  //   auth.isAdmin,
+  auth.authenticate,
+  auth.isAdmin,
   upload.event,
   controller.update,
 );
 
 router.delete(
   `${endpoint}/:eventId`,
-  //   auth.authenticate,
-  //   auth.isAdmin,
+  auth.authenticate,
+  auth.isAdmin,
+
   controller.remove,
 );
 

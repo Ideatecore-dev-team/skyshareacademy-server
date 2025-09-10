@@ -18,6 +18,7 @@ const talentRoute = require("../api/talent/route");
 const mentorRoute = require("../api/mentor/route");
 const parentRoute = require("../api/parent/route");
 const eventRoute = require("../api/event/router");
+const participant = require("../api/participant/route");
 
 const app = express();
 
@@ -65,6 +66,7 @@ app.use(mentorRoute);
 app.use(talentRoute);
 app.use(parentRoute);
 app.use(eventRoute);
+app.use(participant);
 
 app.use("*", (req, _, next) => {
   const endpoint = req.originalUrl;
