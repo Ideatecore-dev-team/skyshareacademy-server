@@ -24,6 +24,7 @@ const app = express();
 const allowedOrigins = [
   "https://dev.skyshareacademy.id",
   "https://skyshareacademy.id",
+  "https://cms.skyshareacademy.id",
   "http://localhost:5173",
   "http://localhost:5174",
 ];
