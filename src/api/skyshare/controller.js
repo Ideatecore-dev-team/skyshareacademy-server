@@ -5,26 +5,18 @@ const create = async (req, res, next) => {
     let gambarAlurAcaraPath;
     let gambarTimelinePath;
 
-    if (
-      !req.files ||
-      !req.files.gambar_alur_acara ||
-      req.files.gambar_alur_acara.length === 0
-    ) {
-      gambarAlurAcaraPath =
-        "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
-    } else {
+    const imageDefault = "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
+
+    if (req.files && req.files.gambar_alur_acara && req.files.gambar_alur_acara.length > 0) {
       gambarAlurAcaraPath = req.files.gambar_alur_acara[0].path;
+    } else {
+      gambarAlurAcaraPath = req.body.gambar_alur_acara || imageDefault;
     }
 
-    if (
-      !req.files ||
-      !req.files.gambar_timeline ||
-      req.files.gambar_timeline.length === 0
-    ) {
-      gambarTimelinePath =
-        "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
-    } else {
+    if (req.files && req.files.gambar_timeline && req.files.gambar_timeline.length > 0) {
       gambarTimelinePath = req.files.gambar_timeline[0].path;
+    } else {
+      gambarTimelinePath = req.body.gambar_timeline || imageDefault;
     }
 
     const request = {
@@ -77,26 +69,18 @@ const update = async (req, res, next) => {
     let gambarAlurAcaraPath;
     let gambarTimelinePath;
 
-    if (
-      !req.files ||
-      !req.files.gambar_alur_acara ||
-      req.files.gambar_alur_acara.length === 0
-    ) {
-      gambarAlurAcaraPath =
-        "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
-    } else {
+    const imageDefault = "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
+
+    if (req.files && req.files.gambar_alur_acara && req.files.gambar_alur_acara.length > 0) {
       gambarAlurAcaraPath = req.files.gambar_alur_acara[0].path;
+    } else {
+      gambarAlurAcaraPath = req.body.gambar_alur_acara || imageDefault;
     }
 
-    if (
-      !req.files ||
-      !req.files.gambar_timeline ||
-      req.files.gambar_timeline.length === 0
-    ) {
-      gambarTimelinePath =
-        "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
-    } else {
+    if (req.files && req.files.gambar_timeline && req.files.gambar_timeline.length > 0) {
       gambarTimelinePath = req.files.gambar_timeline[0].path;
+    } else {
+      gambarTimelinePath = req.body.gambar_timeline || imageDefault;
     }
 
     const request = {
