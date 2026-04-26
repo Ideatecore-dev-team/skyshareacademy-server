@@ -4,12 +4,20 @@ const ResponseError = require("../../error/ResponseError");
 const listMedia = async (options = {}) => {
   try {
     const { folder = 'DEV/', next_cursor, limit = 50 } = options;
-    const result = await cloudinary.api.resources({
-      type: 'upload',
-      prefix: folder,
-      max_results: limit,
-      next_cursor
-    });
+    
+    // Using Search API for reliable sorting
+    let search = cloudinary.search
+      .expression(`folder:${folder}*`)
+      .sort_by('created_at', 'desc')
+      .max_results(limit);
+
+    if (next_cursor) {
+      search = search.next_cursor(next_cursor);
+    }
+
+    const result = await search.execute();
+    
+    // Search API returns 'resources' and 'next_cursor' just like the Admin API
     return result;
   } catch (error) {
     console.error("Cloudinary List Error:", error);
