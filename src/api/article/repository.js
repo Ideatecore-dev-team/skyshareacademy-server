@@ -13,8 +13,8 @@ const create = async (data) => {
 };
 
 // getAll
-const getAll = async () => {
-  const result = await db("article")
+const getAll = async (limit = 10, offset = 0) => {
+  const query = db("article")
     .join("admin", "article.admin_id", "admin.id")
     .join("category", "article.category_id", "category.id")
     .select(
@@ -32,9 +32,19 @@ const getAll = async () => {
       "article.updatedAt"
     )
     .orderBy("article.createdAt", "desc");
-  // .limit(6)
-  // .offset(0);
-  return result;
+
+  if (limit) query.limit(limit);
+  if (offset) query.offset(offset);
+
+  const result = await query;
+  
+  // Get total count for pagination
+  const totalCount = await db("article").count("id as total").first();
+  
+  return {
+    articles: result,
+    total: parseInt(totalCount.total)
+  };
 };
 
 // getById

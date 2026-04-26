@@ -36,9 +36,19 @@ const create = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const response = await service.getAll();
+    const page = req.query.page ? parseInt(req.query.page) : 1;
+    const limit = req.query.limit ? parseInt(req.query.limit) : 10;
+    const offset = (page - 1) * limit;
+
+    const response = await service.getAll({ limit, offset });
     res.status(200).json({
-      data: response,
+      data: response.articles,
+      pagination: {
+        total: response.total,
+        page,
+        limit,
+        totalPages: Math.ceil(response.total / limit)
+      },
       status: "success",
       errors: false,
     });
