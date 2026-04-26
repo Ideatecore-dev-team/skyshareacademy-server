@@ -3,11 +3,11 @@ const ResponseError = require("../../error/ResponseError");
 
 const listMedia = async (options = {}) => {
   try {
-    const { folder = 'DEV/', next_cursor } = options;
+    const { folder = 'DEV/', next_cursor, limit = 50 } = options;
     const result = await cloudinary.api.resources({
       type: 'upload',
       prefix: folder,
-      max_results: 50,
+      max_results: limit,
       next_cursor
     });
     return result;
