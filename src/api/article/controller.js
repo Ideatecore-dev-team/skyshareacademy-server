@@ -3,15 +3,13 @@ const service = require("./service");
 const create = async (req, res, next) => {
   try {
     let imagePath;
-    if (
-      !req.files ||
-      !req.files.image_heading ||
-      req.files.image_heading.length === 0
-    ) {
+    if (req.files && req.files.image_heading && req.files.image_heading.length > 0) {
+      imagePath = req.files.image_heading[0].path;
+    } else if (req.body.image_heading) {
+      imagePath = req.body.image_heading;
+    } else {
       imagePath =
         "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
-    } else {
-      imagePath = req.files.image_heading[0].path;
     }
 
     const request = {
@@ -76,15 +74,13 @@ const getById = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     let imagePath;
-    if (
-      !req.files ||
-      !req.files.image_heading ||
-      req.files.image_heading.length === 0
-    ) {
+    if (req.files && req.files.image_heading && req.files.image_heading.length > 0) {
+      imagePath = req.files.image_heading[0].path;
+    } else if (req.body.image_heading) {
+      imagePath = req.body.image_heading;
+    } else {
       imagePath =
         "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
-    } else {
-      imagePath = req.files.image_heading[0].path;
     }
 
     const request = {

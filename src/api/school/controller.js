@@ -61,15 +61,12 @@ const getById = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     let imagePath;
-    if (
-      !req.files ||
-      !req.files.gambar_logo_sekolah ||
-      req.files.gambar_logo_sekolah.length === 0
-    ) {
-      imagePath =
-        "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
-    } else {
+    const imageDefault = "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg";
+
+    if (req.files && req.files.gambar_logo_sekolah && req.files.gambar_logo_sekolah.length > 0) {
       imagePath = req.files.gambar_logo_sekolah[0].path;
+    } else {
+      imagePath = req.body.gambar_logo_sekolah || imageDefault;
     }
 
     const request = {
