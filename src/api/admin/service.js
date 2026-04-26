@@ -196,10 +196,3 @@ module.exports = {
   updateAdminById,
   deleteAdminById,
 };
-logout,
-  changePassword,
-  getAdmins,
-  getAdminById,
-  updateAdminById,
-  deleteAdminById,
-};
