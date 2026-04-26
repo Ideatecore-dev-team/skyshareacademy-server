@@ -25,5 +25,6 @@ router.post(`${endpoint}/tinymce`, auth.authenticate, upload.general, controller
 // @route   DELETE /media/*
 // @access  Private
 router.delete(`${endpoint}/*`, auth.authenticate, controller.deleteMedia);
+router.post(`${endpoint}/delete-bulk`, auth.authenticate, controller.deleteBulkMedia);
 
 module.exports = router;

@@ -20,13 +20,20 @@ const listMedia = async (options = {}) => {
 const deleteMedia = async (public_id) => {
   try {
     const result = await cloudinary.uploader.destroy(public_id);
-    if (result.result !== 'ok') {
-      throw new ResponseError(400, `Failed to delete media: ${result.result}`);
-    }
     return result;
   } catch (error) {
     console.error("Cloudinary Delete Error:", error);
     throw new ResponseError(500, "Failed to delete media from Cloudinary");
+  }
+};
+
+const deleteBulkMedia = async (public_ids) => {
+  try {
+    const result = await cloudinary.api.delete_resources(public_ids);
+    return result;
+  } catch (error) {
+    console.error("Cloudinary Bulk Delete Error:", error);
+    throw new ResponseError(500, "Failed to delete multiple media from Cloudinary");
   }
 };
 
@@ -39,5 +46,6 @@ const uploadMedia = async (file, folder = 'DEV/general') => {
 module.exports = {
   listMedia,
   deleteMedia,
+  deleteBulkMedia,
   uploadMedia
 };

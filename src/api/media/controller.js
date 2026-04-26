@@ -68,9 +68,27 @@ const uploadTinyMCE = async (req, res, next) => {
   }
 };
 
+const deleteBulkMedia = async (req, res, next) => {
+  try {
+    const { public_ids } = req.body;
+    if (!public_ids || !Array.isArray(public_ids)) {
+      throw new ResponseError(400, "public_ids must be an array");
+    }
+    const response = await service.deleteBulkMedia(public_ids);
+    res.status(200).json({
+      data: response,
+      status: "success",
+      errors: false,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   listMedia,
   deleteMedia,
+  deleteBulkMedia,
   uploadMedia,
   uploadTinyMCE,
 };
