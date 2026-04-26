@@ -14,7 +14,8 @@ const createStorage = (folder) => {
     cloudinary,
     params: {
       folder: `DEV/${folder}`,
-      allowedFormats: ["jpeg", "png", "jpg"],
+      allowedFormats: ["jpeg", "png", "jpg", "webp", "gif"],
+      transformation: [{ format: "webp", quality: "auto", fetch_format: "auto" }],
     },
   });
 };
@@ -50,6 +51,10 @@ const talent = multer({ storage: createStorage("talent") }).fields([
   { name: "gambar_timeline" },
 ]);
 
+const general = multer({ storage: createStorage("general") }).fields([
+  { name: "file" },
+]);
+
 module.exports = {
   partner,
   article,
@@ -58,4 +63,5 @@ module.exports = {
   school,
   parent,
   talent,
+  general,
 };

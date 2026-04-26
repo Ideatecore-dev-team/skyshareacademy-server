@@ -17,6 +17,7 @@ const groupRoute = require("../api/group/route");
 const talentRoute = require("../api/talent/route");
 const mentorRoute = require("../api/mentor/route");
 const parentRoute = require("../api/parent/route");
+const mediaRoute = require("../api/media/route");
 
 const app = express();
 
@@ -63,6 +64,7 @@ app.use(groupRoute);
 app.use(mentorRoute);
 app.use(talentRoute);
 app.use(parentRoute);
+app.use(mediaRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;

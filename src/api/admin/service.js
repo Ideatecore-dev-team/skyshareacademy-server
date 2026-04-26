@@ -4,6 +4,7 @@ const repository = require("./repository");
 const schema = require("./schema");
 const validate = require("../../utilities/validation");
 const ResponseError = require("../../error/ResponseError");
+const privy = require("../../utilities/privy");
 
 const register = async (request) => {
   const validData = validate(request, schema.register);
@@ -147,10 +148,55 @@ const deleteAdminById = async (request) => {
   return result;
 };
 
+const privyLogin = async (request) => {
+  const { idToken } = request;
+  if (!idToken) {
+    throw new ResponseError(400, "idToken is required");
+  }
+
+  try {
+    const claims = await privy.verifyIdToken(idToken);
+    const email = claims.email || claims.user?.email;
+
+    if (!email) {
+      throw new ResponseError(400, "email not found in portal");
+    }
+
+    const admin = await repository.findAdminByEmail(email);
+    if (!admin.length > 0) {
+      throw new ResponseError(403, "your email is not authorized as admin");
+    }
+
+    const token = jwt({
+      id: admin[0].id,
+      role: admin[0].role,
+    });
+
+    return {
+      token,
+      id: admin[0].id,
+      name: admin[0].name,
+      email: admin[0].email,
+      role: admin[0].role,
+    };
+  } catch (error) {
+    console.error("Privy Verify Error:", error);
+    throw new ResponseError(401, "invalid portal token");
+  }
+};
+
 module.exports = {
   register,
   login,
+  privyLogin,
   logout,
+  changePassword,
+  getAdmins,
+  getAdminById,
+  updateAdminById,
+  deleteAdminById,
+};
+logout,
   changePassword,
   getAdmins,
   getAdminById,

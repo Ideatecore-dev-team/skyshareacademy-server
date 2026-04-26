@@ -44,6 +44,30 @@ const login = async (req, res, next) => {
   }
 };
 
+const privyLogin = async (req, res, next) => {
+  try {
+    const request = {
+      idToken: req.body.idToken,
+    };
+
+    const response = await service.privyLogin(request);
+
+    res
+      .status(201)
+      .cookie("authorization", response.token, {
+        httpOnly: true,
+        secure: true,
+      })
+      .json({
+        data: response,
+        status: "success",
+        errors: false,
+      });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const changePassword = async (req, res, next) => {
   try {
     const request = {
@@ -156,6 +180,7 @@ const deleteAdminById = async (req, res, next) => {
 module.exports = {
   register,
   login,
+  privyLogin,
   logout,
   changePassword,
   getAdmins,

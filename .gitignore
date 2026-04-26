@@ -3,3 +3,4 @@ coverage
 logs
 .env
 ecosystem.config.cjs
+.DS_Store

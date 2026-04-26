@@ -10,6 +10,7 @@ const endpoint = "/admin";
 // @route   POST /admin/register
 // @access  Private
 router.post(`${endpoint}/login`, controller.login);
+router.post(`${endpoint}/privy-login`, controller.privyLogin);
 
 // @desc    Change password admin
 // @route   POST /admin/changepassword
