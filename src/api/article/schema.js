@@ -4,7 +4,7 @@ const create = Joi.object({
   image_heading: Joi.string().required(),
   title: Joi.string().required(),
   content: Joi.string().required(),
-  link: Joi.string().required(),
+  link: Joi.string().allow("").optional(),
   admin_id: Joi.number().required(),
   category_id: Joi.number().required(),
 });
@@ -18,7 +18,7 @@ const update = Joi.object({
   image_heading: Joi.string().required(),
   title: Joi.string().required(),
   content: Joi.string().required(),
-  link: Joi.string().required(),
+  link: Joi.string().allow("").optional(),
   admin_id: Joi.number().required(),
   category_id: Joi.number().required(),
 });

@@ -7,7 +7,7 @@ const validate = (request, schema) => {
   });
   if (result.error) {
     throw new ResponseError(
-      403,
+      400,
       `error validation ${result.error.message}`
     );
   } else {
