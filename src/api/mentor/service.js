@@ -21,6 +21,9 @@ const create = async (request) => {
     gambar_timeline: validData.gambar_timeline,
     link_cta: validData.link_cta,
     link_join_program: validData.link_join_program,
+    is_event_active: validData.is_event_active,
+    event_image_url: validData.event_image_url,
+    event_cta_link: validData.event_cta_link,
   };
 
   const mentorResult = await repository.create(mentorData);
@@ -45,6 +48,9 @@ const create = async (request) => {
     gambar_timeline: mentorResult.gambar_timeline,
     link_cta: mentorResult.link_cta,
     link_join_program: mentorResult.link_join_program,
+    is_event_active: mentorResult.is_event_active,
+    event_image_url: mentorResult.event_image_url,
+    event_cta_link: mentorResult.event_cta_link,
     // school_id: getAllmentorSchool,
   };
 };
@@ -63,6 +69,9 @@ const getAll = async () => {
     gambar_timeline: mentorResult[0].gambar_timeline,
     link_cta: mentorResult[0].link_cta,
     link_join_program: mentorResult[0].link_join_program,
+    is_event_active: mentorResult[0].is_event_active,
+    event_image_url: mentorResult[0].event_image_url,
+    event_cta_link: mentorResult[0].event_cta_link,
 
     // school_id: getAllMentorSchool,
   };
@@ -93,6 +102,9 @@ const update = async (request) => {
     gambar_timeline: validData.gambar_timeline,
     link_cta: validData.link_cta,
     link_join_program: validData.link_join_program,
+    is_event_active: validData.is_event_active,
+    event_image_url: validData.event_image_url,
+    event_cta_link: validData.event_cta_link,
   };
 
   const mentorResult = await repository.update(mentorData);
@@ -119,6 +131,9 @@ const update = async (request) => {
     gambar_timeline: mentorResult.gambar_timeline,
     link_cta: mentorResult.link_cta,
     link_join_program: mentorResult.link_join_program,
+    is_event_active: mentorResult.is_event_active,
+    event_image_url: mentorResult.event_image_url,
+    event_cta_link: mentorResult.event_cta_link,
     // school_id: getAllMentorSchool,
   };
 };

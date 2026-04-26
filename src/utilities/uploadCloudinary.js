@@ -39,6 +39,7 @@ const skyshare = multer({ storage: createStorage("skyshare") }).fields([
 const mentor = multer({ storage: createStorage("mentor") }).fields([
   { name: "gambar_alur_acara" },
   { name: "gambar_timeline" },
+  { name: "event_image_url" },
 ]);
 
 const parent = multer({ storage: createStorage("parent") }).fields([
