@@ -15,7 +15,8 @@ const createStorage = (folder) => {
     params: {
       folder: `DEV/${folder}`,
       allowedFormats: ["jpeg", "png", "jpg", "webp", "gif"],
-      transformation: [{ format: "webp", quality: "auto", fetch_format: "auto" }],
+      format: "webp",
+      transformation: [{ quality: "auto", fetch_format: "auto" }],
     },
   });
 };

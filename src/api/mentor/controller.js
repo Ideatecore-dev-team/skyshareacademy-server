@@ -81,12 +81,23 @@ const update = async (req, res, next) => {
       gambarTimelinePath = req.body.gambar_timeline || imageDefault;
     }
 
+    let eventImageURL;
+
+    if (req.files && req.files.event_image_url && req.files.event_image_url.length > 0) {
+      eventImageURL = req.files.event_image_url[0].path;
+    } else {
+      eventImageURL = req.body.event_image_url || null;
+    }
+
     const request = {
       file_booklet: req.body.file_booklet,
       gambar_alur_acara: gambarAlurAcaraPath,
       gambar_timeline: gambarTimelinePath,
       link_cta: req.body.link_cta,
       link_join_program: req.body.link_join_program,
+      is_event_active: req.body.is_event_active === 'true' || req.body.is_event_active === true,
+      event_image_url: eventImageURL,
+      event_cta_link: req.body.event_cta_link,
     };
 
     const response = await service.update(request);

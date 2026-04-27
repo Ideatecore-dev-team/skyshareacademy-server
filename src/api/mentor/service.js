@@ -96,6 +96,10 @@ const update = async (request) => {
     deleteImage(mentorExist[0].gambar_timeline);
   }
 
+  if (validData.event_image_url && validData.event_image_url !== mentorExist[0].event_image_url) {
+    deleteImage(mentorExist[0].event_image_url);
+  }
+
   const mentorData = {
     file_booklet: validData.file_booklet,
     gambar_alur_acara: validData.gambar_alur_acara,
