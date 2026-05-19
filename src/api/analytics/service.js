@@ -49,16 +49,19 @@ const trackPageView = async (data) => {
       path,
       user_agent: user_agent || "unknown",
       referrer: cleanReferrer,
-      load_time_ms: load_time_ms ? parseInt(load_time_ms, 10) : null,
-      fcp_ms: fcp_ms ? parseInt(fcp_ms, 10) : null,
-      lcp_ms: lcp_ms ? parseInt(lcp_ms, 10) : null,
-      cls: cls ? parseFloat(cls) : null,
-      fid_ms: fid_ms ? parseInt(fid_ms, 10) : null,
+      load_time_ms: (load_time_ms !== undefined && load_time_ms !== null) ? parseInt(load_time_ms, 10) : null,
+      fcp_ms: (fcp_ms !== undefined && fcp_ms !== null) ? parseInt(fcp_ms, 10) : null,
+      lcp_ms: (lcp_ms !== undefined && lcp_ms !== null) ? parseInt(lcp_ms, 10) : null,
+      cls: (cls !== undefined && cls !== null) ? parseFloat(cls) : null,
+      fid_ms: (fid_ms !== undefined && fid_ms !== null) ? parseInt(fid_ms, 10) : null,
     });
 
     return { success: true };
   } catch (error) {
     console.error("Track PageView Error:", error);
+    if (error instanceof ResponseError) {
+      throw error;
+    }
     throw new ResponseError(500, `Failed to track pageview: ${error.message}`);
   }
 };
@@ -82,13 +85,17 @@ const getAnalyticsDashboard = async (days = 90) => {
       .first();
 
     // 2. Average Performance Metrics (Core Web Vitals)
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - limitDays);
+    startDate.setHours(0, 0, 0, 0);
+
     const performanceStats = await db("analytics_views")
       .avg("load_time_ms as avg_load_time")
       .avg("fcp_ms as avg_fcp")
       .avg("lcp_ms as avg_lcp")
       .avg("cls as avg_cls")
       .avg("fid_ms as avg_fid")
-      .where("created_at", ">=", db.raw("NOW() - INTERVAL '?? days'", [limitDays]))
+      .where("created_at", ">=", startDate)
       .first();
 
     // 3. Time Series Analytics for the last N days (grouped by date)
@@ -96,7 +103,7 @@ const getAnalyticsDashboard = async (days = 90) => {
       .select(db.raw("DATE(created_at) as date"))
       .count("* as pageviews")
       .countDistinct("ip_address as unique_visitors")
-      .where("created_at", ">=", db.raw("NOW() - INTERVAL '?? days'", [limitDays]))
+      .where("created_at", ">=", startDate)
       .groupByRaw("DATE(created_at)")
       .orderBy("date", "asc");
 

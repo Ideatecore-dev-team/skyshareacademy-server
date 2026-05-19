@@ -11,6 +11,12 @@ const listMedia = async (options = {}) => {
     const { next_cursor, limit = 50, protocol = "http", host = "localhost:3002" } = options;
     const uploadsDir = path.join(__dirname, "../../../uploads");
 
+    let baseUrl = process.env.APP_URL;
+    if (!baseUrl) {
+      baseUrl = `${protocol}://${host}`;
+    }
+    baseUrl = baseUrl.replace(/\/+$/, "");
+
     if (!fs.existsSync(uploadsDir)) {
       return { resources: [], next_cursor: null };
     }
@@ -35,7 +41,7 @@ const listMedia = async (options = {}) => {
           const stat = fs.statSync(fullPath);
           // Standardize separator to slash
           const cleanRelPath = relPath.replace(/\\/g, "/");
-          const publicUrl = `${protocol}://${host}/uploads/${cleanRelPath}`;
+          const publicUrl = `${baseUrl}/uploads/${cleanRelPath}`;
 
           allFiles.push({
             public_id: `uploads/${cleanRelPath}`, // Store local relative path as the public ID

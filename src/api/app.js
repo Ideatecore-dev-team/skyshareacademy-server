@@ -27,6 +27,7 @@ const allowedOrigins = [
   "https://dev.skyshareacademy.id",
   "https://skyshareacademy.id",
   "https://cms.skyshareacademy.id",
+  "http://localhost:3000",
   "http://localhost:5173",
   "http://localhost:5174",
 ];
