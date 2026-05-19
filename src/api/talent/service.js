@@ -77,13 +77,17 @@ const update = async (request) => {
   if (validData.gambar_alur_acara === imageDefault) {
     validData.gambar_alur_acara = talentExist[0].gambar_alur_acara;
   } else {
-    deleteImage(talentExist[0].gambar_alur_acara);
+    if (validData.gambar_alur_acara !== talentExist[0].gambar_alur_acara) {
+      deleteImage(talentExist[0].gambar_alur_acara);
+    }
   }
 
   if (validData.gambar_timeline === imageDefault) {
     validData.gambar_timeline = talentExist[0].gambar_timeline;
   } else {
-    deleteImage(talentExist[0].gambar_timeline);
+    if (validData.gambar_timeline !== talentExist[0].gambar_timeline) {
+      deleteImage(talentExist[0].gambar_timeline);
+    }
   }
 
   const talentData = {

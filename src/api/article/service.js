@@ -55,8 +55,9 @@ const update = async (request) => {
   ) {
     validData.image_heading = articleExist.image_heading;
   } else {
-    // console.log(articleExist.image_heading);
-    await deleteImage(articleExist.image_heading);
+    if (validData.image_heading !== articleExist.image_heading) {
+      await deleteImage(articleExist.image_heading);
+    }
   }
 
   const updateData = {

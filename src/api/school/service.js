@@ -54,8 +54,9 @@ const update = async (request) => {
   ) {
     validData.gambar_logo_sekolah = schoolExist.gambar_logo_sekolah;
   } else {
-    // console.log(schoolExist.gambar_logo_sekolah);
-    await deleteImage(schoolExist.gambar_logo_sekolah);
+    if (validData.gambar_logo_sekolah !== schoolExist.gambar_logo_sekolah) {
+      await deleteImage(schoolExist.gambar_logo_sekolah);
+    }
   }
 
   const updateData = {

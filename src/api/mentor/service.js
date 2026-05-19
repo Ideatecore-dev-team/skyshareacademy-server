@@ -87,13 +87,17 @@ const update = async (request) => {
   if (validData.gambar_alur_acara === imageDefault) {
     validData.gambar_alur_acara = mentorExist[0].gambar_alur_acara;
   } else {
-    deleteImage(mentorExist[0].gambar_alur_acara);
+    if (validData.gambar_alur_acara !== mentorExist[0].gambar_alur_acara) {
+      deleteImage(mentorExist[0].gambar_alur_acara);
+    }
   }
 
   if (validData.gambar_timeline === imageDefault) {
     validData.gambar_timeline = mentorExist[0].gambar_timeline;
   } else {
-    deleteImage(mentorExist[0].gambar_timeline);
+    if (validData.gambar_timeline !== mentorExist[0].gambar_timeline) {
+      deleteImage(mentorExist[0].gambar_timeline);
+    }
   }
 
   if (validData.event_image_url && validData.event_image_url !== mentorExist[0].event_image_url) {
