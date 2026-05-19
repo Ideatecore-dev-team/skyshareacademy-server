@@ -19,9 +19,13 @@ const create = async (request) => {
 const getAll = async (request = {}) => {
   const limit = request.limit ? Number(request.limit) : 10;
   const offset = request.offset ? Number(request.offset) : 0;
+  const search = request.search || "";
+  const category_id = request.category_id || "";
   
-  const result = await repository.getAll(limit, offset);
-  if (!result.articles.length > 0 && offset === 0) {
+  const result = await repository.getAll(limit, offset, search, category_id);
+  
+  // Only throw 404 if not searching/filtering and no articles exist
+  if (!search && !category_id && !result.articles.length > 0 && offset === 0) {
     throw new ResponseError(404, "article not found");
   }
   

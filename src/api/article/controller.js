@@ -37,8 +37,10 @@ const getAll = async (req, res, next) => {
     const page = req.query.page ? parseInt(req.query.page) : 1;
     const limit = req.query.limit ? parseInt(req.query.limit) : 10;
     const offset = (page - 1) * limit;
+    const search = req.query.search || "";
+    const category_id = req.query.category_id || "";
 
-    const response = await service.getAll({ limit, offset });
+    const response = await service.getAll({ limit, offset, search, category_id });
     res.status(200).json({
       data: response.articles,
       pagination: {

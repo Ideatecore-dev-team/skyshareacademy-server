@@ -13,7 +13,7 @@ const create = async (data) => {
 };
 
 // getAll
-const getAll = async (limit = 10, offset = 0) => {
+const getAll = async (limit = 10, offset = 0, search = "", category_id = "") => {
   const query = db("article")
     .join("admin", "article.admin_id", "admin.id")
     .join("category", "article.category_id", "category.id")
@@ -33,13 +33,27 @@ const getAll = async (limit = 10, offset = 0) => {
     )
     .orderBy("article.createdAt", "desc");
 
+  if (search) {
+    query.where("article.title", "like", `%${search}%`);
+  }
+  if (category_id) {
+    query.where("article.category_id", category_id);
+  }
+
   if (limit) query.limit(limit);
   if (offset) query.offset(offset);
 
   const result = await query;
   
-  // Get total count for pagination
-  const totalCount = await db("article").count("id as total").first();
+  // Get total count for pagination with identical filters
+  const countQuery = db("article");
+  if (search) {
+    countQuery.where("article.title", "like", `%${search}%`);
+  }
+  if (category_id) {
+    countQuery.where("article.category_id", category_id);
+  }
+  const totalCount = await countQuery.count("id as total").first();
   
   return {
     articles: result,
