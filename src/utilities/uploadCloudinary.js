@@ -59,9 +59,14 @@ const createLocalUploadMiddleware = (folder, fields) => {
               fs.writeFileSync(filePath, finalBuffer);
 
               // Construct the absolute public URL of the uploaded asset dynamically
-              const protocol = req.protocol;
-              const host = req.get("host");
-              const publicUrl = `${protocol}://${host}/uploads/${folder}/${filename}`;
+              let baseUrl = process.env.APP_URL;
+              if (!baseUrl) {
+                const protocol = req.protocol;
+                const host = req.get("host");
+                baseUrl = `${protocol}://${host}`;
+              }
+              baseUrl = baseUrl.replace(/\/+$/, "");
+              const publicUrl = `${baseUrl}/uploads/${folder}/${filename}`;
 
               // Override standard multer properties so controllers get the local URL
               file.filename = filename;

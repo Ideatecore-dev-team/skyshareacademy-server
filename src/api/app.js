@@ -21,6 +21,7 @@ const mediaRoute = require("../api/media/route");
 const analyticsRoute = require("../api/analytics/route");
 
 const app = express();
+app.set("trust proxy", 1);
 
 const allowedOrigins = [
   "https://dev.skyshareacademy.id",
