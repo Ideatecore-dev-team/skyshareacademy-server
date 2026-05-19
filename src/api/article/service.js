@@ -54,10 +54,6 @@ const update = async (request) => {
     "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg"
   ) {
     validData.image_heading = articleExist.image_heading;
-  } else {
-    if (validData.image_heading !== articleExist.image_heading) {
-      await deleteImage(articleExist.image_heading);
-    }
   }
 
   const updateData = {
@@ -89,7 +85,10 @@ const remove = async (request) => {
   }
 
   const result = await repository.remove(validData);
-  await deleteImage(result.image_heading);
+  
+  if (result.image_heading && !result.image_heading.includes("/uploads/general/")) {
+    await deleteImage(result.image_heading);
+  }
 
   if (!result) {
     throw new ResponseError(404, "article not found");

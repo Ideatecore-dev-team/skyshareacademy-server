@@ -53,10 +53,6 @@ const update = async (request) => {
     "https://res.cloudinary.com/dsh5ppscb/image/upload/v1714931793/no-image/No_Image_Available_zfarlj.jpg"
   ) {
     validData.gambar_logo_sekolah = schoolExist.gambar_logo_sekolah;
-  } else {
-    if (validData.gambar_logo_sekolah !== schoolExist.gambar_logo_sekolah) {
-      await deleteImage(schoolExist.gambar_logo_sekolah);
-    }
   }
 
   const updateData = {
@@ -85,7 +81,10 @@ const remove = async (request) => {
   }
 
   const result = await repository.remove(validData);
-  await deleteImage(result.gambar_logo_sekolah);
+  
+  if (result.gambar_logo_sekolah && !result.gambar_logo_sekolah.includes("/uploads/general/")) {
+    await deleteImage(result.gambar_logo_sekolah);
+  }
 
   if (!result) {
     throw new ResponseError(404, "article not found");
