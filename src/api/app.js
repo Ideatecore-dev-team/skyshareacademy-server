@@ -18,6 +18,7 @@ const talentRoute = require("../api/talent/route");
 const mentorRoute = require("../api/mentor/route");
 const parentRoute = require("../api/parent/route");
 const mediaRoute = require("../api/media/route");
+const analyticsRoute = require("../api/analytics/route");
 
 const app = express();
 
@@ -50,6 +51,9 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const path = require("path");
+app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
+
 app.get("/", (req, res) => {
   res.send("Hello World Sekai!");
 });
@@ -66,6 +70,7 @@ app.use(mentorRoute);
 app.use(talentRoute);
 app.use(parentRoute);
 app.use(mediaRoute);
+app.use(analyticsRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;

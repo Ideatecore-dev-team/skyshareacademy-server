@@ -4,7 +4,9 @@ const listMedia = async (req, res, next) => {
   try {
     const options = {
       folder: req.query.folder || 'DEV/',
-      next_cursor: req.query.next_cursor
+      next_cursor: req.query.next_cursor,
+      protocol: req.protocol,
+      host: req.get("host")
     };
     const response = await service.listMedia(options);
     res.status(200).json({
