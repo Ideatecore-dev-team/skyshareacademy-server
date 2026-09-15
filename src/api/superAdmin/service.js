@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("../../utilities/token");
 const repository = require("./repository");
 const schema = require("./schema");

@@ -340,7 +340,63 @@ const getAnalyticsDashboard = async (days = 90) => {
   }
 };
 
+/**
+ * Record a CMS activity log
+ */
+const createActivityLog = async ({ admin_id, admin_name, action, ip_address }) => {
+  try {
+    const [log] = await db("cms_activity_logs")
+      .insert({
+        admin_id: admin_id || null,
+        admin_name: admin_name || "Admin",
+        action,
+        ip_address: ip_address || "127.0.0.1",
+        createdAt: db.fn.now(),
+      })
+      .returning(["id", "admin_id", "admin_name", "action", "ip_address", "createdAt"]);
+
+    // Auto-cleanup: asynchronously purge logs older than 90 days to prevent DB bloat
+    db("cms_activity_logs")
+      .where("createdAt", "<", db.raw("NOW() - INTERVAL '90 days'"))
+      .del()
+      .catch((err) => {
+        console.error("[ActivityLog Cleanup Error]:", err.message);
+      });
+
+    return log;
+  } catch (error) {
+    console.error("Create Activity Log Error:", error);
+    throw new ResponseError(500, `Failed to record activity log: ${error.message}`);
+  }
+};
+
+/**
+ * Retrieve recent activity logs
+ */
+const getActivityLogs = async ({ limit = 50, offset = 0 } = {}) => {
+  try {
+    const logs = await db("cms_activity_logs")
+      .select(["id", "admin_id", "admin_name", "action", "ip_address", "createdAt"])
+      .orderBy("createdAt", "desc")
+      .limit(Math.min(parseInt(limit, 10) || 50, 100))
+      .offset(parseInt(offset, 10) || 0);
+
+    const [{ count }] = await db("cms_activity_logs").count("id as count");
+
+    return {
+      logs,
+      total: parseInt(count, 10) || 0,
+    };
+  } catch (error) {
+    console.error("Get Activity Logs Error:", error);
+    throw new ResponseError(500, `Failed to fetch activity logs: ${error.message}`);
+  }
+};
+
 module.exports = {
   trackPageView,
   getAnalyticsDashboard,
+  createActivityLog,
+  getActivityLogs,
 };
+

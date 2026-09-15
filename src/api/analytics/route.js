@@ -15,4 +15,19 @@ router.get(
   controller.getAnalyticsDashboard
 );
 
+// Admin activity logs
+router.post(
+  "/analytics/log",
+  auth.authenticate,
+  auth.isAdmin,
+  controller.createActivityLog
+);
+router.get(
+  "/analytics/logs",
+  auth.authenticate,
+  auth.isAdmin,
+  controller.getActivityLogs
+);
+
 module.exports = router;
+

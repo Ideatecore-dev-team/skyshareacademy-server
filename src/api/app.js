@@ -19,6 +19,8 @@ const mentorRoute = require("../api/mentor/route");
 const parentRoute = require("../api/parent/route");
 const mediaRoute = require("../api/media/route");
 const analyticsRoute = require("../api/analytics/route");
+const studentRoute = require("../api/student/route");
+const portalEventRoute = require("../api/portal-events/route");
 
 const app = express();
 app.set("trust proxy", 1);
@@ -27,9 +29,12 @@ const allowedOrigins = [
   "https://dev.skyshareacademy.id",
   "https://skyshareacademy.id",
   "https://cms.skyshareacademy.id",
+  "https://portal.skyshareacademy.id",
   "http://localhost:3000",
   "http://localhost:5173",
   "http://localhost:5174",
+  "http://localhost:5175",
+  "http://localhost:5176",
 ];
 
 app.use(
@@ -73,6 +78,8 @@ app.use(talentRoute);
 app.use(parentRoute);
 app.use(mediaRoute);
 app.use(analyticsRoute);
+app.use(studentRoute);
+app.use(portalEventRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;
