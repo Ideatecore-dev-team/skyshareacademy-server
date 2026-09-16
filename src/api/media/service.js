@@ -18,7 +18,7 @@ const listMedia = async (options = {}) => {
     baseUrl = baseUrl.replace(/\/+$/, "");
 
     if (!fs.existsSync(uploadsDir)) {
-      return { resources: [], next_cursor: null };
+      return { resources: [], next_cursor: null, total_bytes: 0, total_count: 0 };
     }
 
     const allFiles = [];
@@ -56,6 +56,9 @@ const listMedia = async (options = {}) => {
 
     scanDir(uploadsDir);
 
+    const totalBytes = allFiles.reduce((acc, file) => acc + (file.bytes || 0), 0);
+    const totalCount = allFiles.length;
+
     // Sort files by creation time descending (newest first)
     allFiles.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
@@ -68,6 +71,8 @@ const listMedia = async (options = {}) => {
     return {
       resources: paginatedFiles,
       next_cursor: nextCursorVal,
+      total_bytes: totalBytes,
+      total_count: totalCount,
     };
   } catch (error) {
     console.error("Local Media List Error:", error);

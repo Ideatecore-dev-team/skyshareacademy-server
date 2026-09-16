@@ -12,6 +12,8 @@ const listMedia = async (req, res, next) => {
     res.status(200).json({
       data: response.resources,
       next_cursor: response.next_cursor,
+      total_bytes: response.total_bytes,
+      total_count: response.total_count,
       status: "success",
       errors: false,
     });
