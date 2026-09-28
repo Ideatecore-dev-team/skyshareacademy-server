@@ -21,6 +21,7 @@ const mediaRoute = require("../api/media/route");
 const analyticsRoute = require("../api/analytics/route");
 const studentRoute = require("../api/student/route");
 const portalEventRoute = require("../api/portal-events/route");
+const popupConfigRoute = require("../api/popup-config/route");
 
 const app = express();
 app.set("trust proxy", 1);
@@ -80,6 +81,7 @@ app.use(mediaRoute);
 app.use(analyticsRoute);
 app.use(studentRoute);
 app.use(portalEventRoute);
+app.use(popupConfigRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;
