@@ -79,10 +79,13 @@ const createActivityLog = async (req, res, next) => {
       });
     }
 
+    // Sanitize and limit action length to avoid bloat
+    const sanitizedAction = String(action).trim().slice(0, 150);
+
     const response = await service.createActivityLog({
       admin_id,
       admin_name,
-      action,
+      action: sanitizedAction,
       ip_address: ipAddress,
     });
 
@@ -97,15 +100,27 @@ const createActivityLog = async (req, res, next) => {
 };
 
 /**
- * Retrieves activity logs for CMS dashboard.
+ * Retrieves activity logs for CMS dashboard with lightweight pagination.
  */
 const getActivityLogs = async (req, res, next) => {
   try {
-    const limit = req.query.limit || 50;
-    const offset = req.query.offset || 0;
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 10, 1), 100);
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const offset = req.query.offset !== undefined 
+      ? Math.max(parseInt(req.query.offset, 10) || 0, 0)
+      : (page - 1) * limit;
+
     const response = await service.getActivityLogs({ limit, offset });
+    const total = response.total || 0;
+    const totalPages = Math.max(Math.ceil(total / limit), 1);
+
     res.status(200).json({
-      data: response,
+      data: {
+        ...response,
+        page,
+        limit,
+        totalPages,
+      },
       status: "success",
       errors: false,
     });
