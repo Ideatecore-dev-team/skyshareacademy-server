@@ -66,6 +66,7 @@ const update = async (request) => {
     title: validData.title,
     content: validData.content,
     link: validData.link,
+    cta_label: validData.cta_label,
     admin_id: validData.admin_id,
     category_id: Number(validData.category_id),
   };

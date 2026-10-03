@@ -5,6 +5,7 @@ const create = Joi.object({
   title: Joi.string().required(),
   content: Joi.string().required(),
   link: Joi.string().allow("").optional(),
+  cta_label: Joi.string().allow("").optional(),
   admin_id: Joi.number().required(),
   category_id: Joi.number().required(),
 });
@@ -19,6 +20,7 @@ const update = Joi.object({
   title: Joi.string().required(),
   content: Joi.string().required(),
   link: Joi.string().allow("").optional(),
+  cta_label: Joi.string().allow("").optional(),
   admin_id: Joi.number().required(),
   category_id: Joi.number().required(),
 });

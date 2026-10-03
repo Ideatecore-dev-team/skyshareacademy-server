@@ -17,6 +17,7 @@ const create = async (req, res, next) => {
       title: req.body.title,
       content: req.body.content,
       link: req.body.link,
+      cta_label: req.body.cta_label,
       admin_id: Number(req.user.id),
       category_id: Number(req.body.category_id),
     };
@@ -91,6 +92,7 @@ const update = async (req, res, next) => {
       title: req.body.title,
       content: req.body.content,
       link: req.body.link,
+      cta_label: req.body.cta_label,
       admin_id: Number(req.user.id),
       category_id: Number(req.body.category_id),
     };
