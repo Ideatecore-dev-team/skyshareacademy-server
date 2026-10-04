@@ -146,17 +146,11 @@ const createEvent = async (req, res, next) => {
         req.body.is_active === 1;
     }
 
-    let categoryId = null;
-    if (req.body.category_id) {
-      categoryId = Number(req.body.category_id);
-    }
-
     const payload = {
       title: req.body.title,
       description: req.body.description || null,
       event_date: req.body.event_date ? new Date(req.body.event_date) : null,
       event_type: req.body.event_type || "workshop",
-      category_id: categoryId,
       thumbnail_url: thumbnailUrl,
       target_role: req.body.target_role || "all",
       is_active: isActive,
@@ -183,9 +177,6 @@ const updateEvent = async (req, res, next) => {
       payload.event_date = req.body.event_date ? new Date(req.body.event_date) : null;
     }
     if (req.body.event_type !== undefined) payload.event_type = req.body.event_type;
-    if (req.body.category_id !== undefined) {
-      payload.category_id = req.body.category_id ? Number(req.body.category_id) : null;
-    }
     if (req.body.target_role !== undefined) payload.target_role = req.body.target_role;
     if (req.body.is_active !== undefined) {
       payload.is_active =

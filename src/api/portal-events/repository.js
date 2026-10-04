@@ -10,14 +10,8 @@ const getEventsByRole = async (role) => {
 };
 
 const getEventById = async (id) => {
-  return await db("portal_events as pe")
-    .leftJoin("category as c", "pe.category_id", "c.id")
-    .select(
-      "pe.*",
-      "c.name as category_name",
-      "c.color as category_color"
-    )
-    .where("pe.id", id)
+  return await db("portal_events")
+    .where("id", id)
     .first();
 };
 
@@ -89,26 +83,14 @@ const reviewSubmission = async (submissionId, data) => {
 };
 
 const getAllPublicEvents = async () => {
-  return await db("portal_events as pe")
-    .leftJoin("category as c", "pe.category_id", "c.id")
-    .select(
-      "pe.*",
-      "c.name as category_name",
-      "c.color as category_color"
-    )
-    .where("pe.is_active", true)
-    .orderBy("pe.event_date", "desc");
+  return await db("portal_events")
+    .where("is_active", true)
+    .orderBy("event_date", "desc");
 };
 
 const getAllAdminEvents = async () => {
-  return await db("portal_events as pe")
-    .leftJoin("category as c", "pe.category_id", "c.id")
-    .select(
-      "pe.*",
-      "c.name as category_name",
-      "c.color as category_color"
-    )
-    .orderBy("pe.event_date", "desc");
+  return await db("portal_events")
+    .orderBy("event_date", "desc");
 };
 
 const createEvent = async (data) => {
