@@ -85,9 +85,13 @@ const reviewSubmission = async (submissionId, request) => {
   return updated;
 };
 
-const getPublicEvents = async () => {
-  const events = await repository.getAllPublicEvents();
-  return (events || []).map(formatEvent);
+const getPublicEvents = async (filter) => {
+  const result = await repository.getAllPublicEvents(filter);
+  return {
+    events: (result.events || []).map(formatEvent),
+    total: result.total,
+    counts: result.counts,
+  };
 };
 
 const adminGetEvents = async () => {

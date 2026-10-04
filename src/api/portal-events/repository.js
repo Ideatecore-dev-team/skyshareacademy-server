@@ -82,10 +82,106 @@ const reviewSubmission = async (submissionId, data) => {
   return updated[0];
 };
 
-const getAllPublicEvents = async () => {
-  return await db("portal_events")
-    .where("is_active", true)
-    .orderBy("event_date", "desc");
+const getAllPublicEvents = async ({
+  limit = 8,
+  offset = 0,
+  search = "",
+  program = "all",
+  timing = "upcoming",
+} = {}) => {
+  const query = db("portal_events").where("is_active", true);
+
+  if (program && program !== "all") {
+    query.where((q) => {
+      q.where("target_role", "all").orWhere("target_role", program);
+    });
+  }
+
+  if (search && search.trim()) {
+    const term = `%${search.trim()}%`;
+    query.where((q) => {
+      q.whereILike("title", term)
+        .orWhereILike("description", term)
+        .orWhereILike("event_type", term);
+    });
+  }
+
+  // Timing filter & Sorting:
+  // "diurutkan dari event yang paling dekat akan datang. dan paling jauh akan datang" -> asc
+  if (timing === "upcoming") {
+    query.where("event_date", ">=", db.fn.now());
+    query.orderBy("event_date", "asc");
+  } else if (timing === "past") {
+    query.where("event_date", "<", db.fn.now());
+    query.orderBy("event_date", "desc");
+  } else {
+    query.orderBy("event_date", "desc");
+  }
+
+  // Count query for pagination of currently active filtered items
+  const countQuery = db("portal_events").where("is_active", true);
+  if (program && program !== "all") {
+    countQuery.where((q) => {
+      q.where("target_role", "all").orWhere("target_role", program);
+    });
+  }
+  if (search && search.trim()) {
+    const term = `%${search.trim()}%`;
+    countQuery.where((q) => {
+      q.whereILike("title", term)
+        .orWhereILike("description", term)
+        .orWhereILike("event_type", term);
+    });
+  }
+  if (timing === "upcoming") {
+    countQuery.where("event_date", ">=", db.fn.now());
+  } else if (timing === "past") {
+    countQuery.where("event_date", "<", db.fn.now());
+  }
+
+  const totalCount = await countQuery.count("id as total").first();
+  const total = parseInt(totalCount ? totalCount.total : 0, 10);
+
+  // Tab count badges (all, upcoming, past) for current program & search
+  const statsQuery = db("portal_events").where("is_active", true);
+  if (program && program !== "all") {
+    statsQuery.where((q) => {
+      q.where("target_role", "all").orWhere("target_role", program);
+    });
+  }
+  if (search && search.trim()) {
+    const term = `%${search.trim()}%`;
+    statsQuery.where((q) => {
+      q.whereILike("title", term)
+        .orWhereILike("description", term)
+        .orWhereILike("event_type", term);
+    });
+  }
+
+  const stats = await statsQuery
+    .select(
+      db.raw("COUNT(*) as count_all"),
+      db.raw("COUNT(CASE WHEN event_date >= NOW() THEN 1 END) as count_upcoming"),
+      db.raw("COUNT(CASE WHEN event_date < NOW() THEN 1 END) as count_past")
+    )
+    .first();
+
+  const counts = {
+    all: parseInt(stats?.count_all || 0, 10),
+    upcoming: parseInt(stats?.count_upcoming || 0, 10),
+    past: parseInt(stats?.count_past || 0, 10),
+  };
+
+  if (limit) query.limit(limit);
+  if (offset) query.offset(offset);
+
+  const events = await query;
+
+  return {
+    events,
+    total,
+    counts,
+  };
 };
 
 const getAllAdminEvents = async () => {

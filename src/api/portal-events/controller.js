@@ -91,11 +91,32 @@ const reviewSubmission = async (req, res, next) => {
 
 const getPublicEvents = async (req, res, next) => {
   try {
-    const result = await service.getPublicEvents();
+    const page = req.query.page ? parseInt(req.query.page, 10) : 1;
+    const limit = req.query.limit ? parseInt(req.query.limit, 10) : 8;
+    const offset = (page - 1) * limit;
+    const search = req.query.search || "";
+    const program = req.query.program || "all";
+    const timing = req.query.timing || "upcoming";
+
+    const result = await service.getPublicEvents({
+      limit,
+      offset,
+      search,
+      program,
+      timing,
+    });
+
     res.status(200).json({
       status: "success",
       errors: false,
-      data: result,
+      data: result.events,
+      pagination: {
+        total: result.total,
+        page,
+        limit,
+        totalPages: Math.max(1, Math.ceil(result.total / limit)),
+      },
+      counts: result.counts,
     });
   } catch (error) {
     next(error);
