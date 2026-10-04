@@ -10,7 +10,15 @@ const getEventsByRole = async (role) => {
 };
 
 const getEventById = async (id) => {
-  return await db("portal_events").where({ id }).first();
+  return await db("portal_events as pe")
+    .leftJoin("category as c", "pe.category_id", "c.id")
+    .select(
+      "pe.*",
+      "c.name as category_name",
+      "c.color as category_color"
+    )
+    .where("pe.id", id)
+    .first();
 };
 
 const getSubmissionByStudentAndEvent = async (studentId, eventId) => {
@@ -80,6 +88,55 @@ const reviewSubmission = async (submissionId, data) => {
   return updated[0];
 };
 
+const getAllPublicEvents = async () => {
+  return await db("portal_events as pe")
+    .leftJoin("category as c", "pe.category_id", "c.id")
+    .select(
+      "pe.*",
+      "c.name as category_name",
+      "c.color as category_color"
+    )
+    .where("pe.is_active", true)
+    .orderBy("pe.event_date", "desc");
+};
+
+const getAllAdminEvents = async () => {
+  return await db("portal_events as pe")
+    .leftJoin("category as c", "pe.category_id", "c.id")
+    .select(
+      "pe.*",
+      "c.name as category_name",
+      "c.color as category_color"
+    )
+    .orderBy("pe.event_date", "desc");
+};
+
+const createEvent = async (data) => {
+  const created = await db("portal_events")
+    .insert({
+      ...data,
+      createdAt: db.fn.now(),
+      updatedAt: db.fn.now(),
+    })
+    .returning("*");
+  return created[0];
+};
+
+const updateEvent = async (id, data) => {
+  const updated = await db("portal_events")
+    .where({ id })
+    .update({
+      ...data,
+      updatedAt: db.fn.now(),
+    })
+    .returning("*");
+  return updated[0];
+};
+
+const deleteEvent = async (id) => {
+  return await db("portal_events").where({ id }).del();
+};
+
 module.exports = {
   getEventsByRole,
   getEventById,
@@ -87,4 +144,9 @@ module.exports = {
   createOrUpdateSubmission,
   getAllSubmissionsForMentor,
   reviewSubmission,
+  getAllPublicEvents,
+  getAllAdminEvents,
+  createEvent,
+  updateEvent,
+  deleteEvent,
 };

@@ -1,9 +1,47 @@
 const express = require("express");
 const auth = require("../../middleware/auth");
+const upload = require("../../utilities/uploadCloudinary");
 const controller = require("./controller");
 
 const router = express.Router();
 const endpoint = "/portal";
+
+// Public Event Endpoint
+router.get("/events", controller.getPublicEvents);
+
+// Admin Event Endpoints
+router.get(
+  "/admin/events",
+  auth.authenticate,
+  auth.isAdmin,
+  controller.adminGetEvents
+);
+router.get(
+  "/admin/events/:id",
+  auth.authenticate,
+  auth.isAdmin,
+  controller.adminGetEventById
+);
+router.post(
+  "/admin/events",
+  auth.authenticate,
+  auth.isAdmin,
+  upload.events,
+  controller.createEvent
+);
+router.put(
+  "/admin/events/:id",
+  auth.authenticate,
+  auth.isAdmin,
+  upload.events,
+  controller.updateEvent
+);
+router.delete(
+  "/admin/events/:id",
+  auth.authenticate,
+  auth.isAdmin,
+  controller.deleteEvent
+);
 
 // Event list & detail (student / member)
 router.get(

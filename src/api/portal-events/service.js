@@ -67,6 +67,46 @@ const reviewSubmission = async (submissionId, request) => {
   return updated;
 };
 
+const getPublicEvents = async () => {
+  return await repository.getAllPublicEvents();
+};
+
+const adminGetEvents = async () => {
+  return await repository.getAllAdminEvents();
+};
+
+const adminGetEventById = async (id) => {
+  const event = await repository.getEventById(id);
+  if (!event) {
+    throw new ResponseError(404, "Event not found");
+  }
+  return event;
+};
+
+const createEvent = async (data) => {
+  if (!data.title) {
+    throw new ResponseError(400, "Title is required");
+  }
+  return await repository.createEvent(data);
+};
+
+const updateEvent = async (id, data) => {
+  const existing = await repository.getEventById(id);
+  if (!existing) {
+    throw new ResponseError(404, "Event not found");
+  }
+  return await repository.updateEvent(id, data);
+};
+
+const deleteEvent = async (id) => {
+  const existing = await repository.getEventById(id);
+  if (!existing) {
+    throw new ResponseError(404, "Event not found");
+  }
+  await repository.deleteEvent(id);
+  return true;
+};
+
 module.exports = {
   getEvents,
   getEventDetail,
@@ -74,4 +114,10 @@ module.exports = {
   getMySubmission,
   getSubmissionsForMentor,
   reviewSubmission,
+  getPublicEvents,
+  adminGetEvents,
+  adminGetEventById,
+  createEvent,
+  updateEvent,
+  deleteEvent,
 };
