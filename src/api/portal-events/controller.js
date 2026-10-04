@@ -189,6 +189,8 @@ const createEvent = async (req, res, next) => {
       target_role: req.body.target_role || "all",
       is_active: isActive,
       documentation_urls: JSON.stringify(parseDocumentationUrls(req)),
+      cta_link: req.body.cta_link ? req.body.cta_link.trim() || null : null,
+      cta_label: req.body.cta_label ? req.body.cta_label.trim() || null : null,
     };
 
     const result = await service.createEvent(payload);
@@ -219,6 +221,13 @@ const updateEvent = async (req, res, next) => {
         req.body.is_active === "true" ||
         req.body.is_active === "1" ||
         req.body.is_active === 1;
+    }
+
+    if (req.body.cta_link !== undefined) {
+      payload.cta_link = req.body.cta_link ? req.body.cta_link.trim() || null : null;
+    }
+    if (req.body.cta_label !== undefined) {
+      payload.cta_label = req.body.cta_label ? req.body.cta_label.trim() || null : null;
     }
 
     if (req.files && req.files.thumbnail_url && req.files.thumbnail_url.length > 0) {
