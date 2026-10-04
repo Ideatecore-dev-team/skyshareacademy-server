@@ -106,7 +106,10 @@ const talent = createLocalUploadMiddleware("talent", [
   { name: "gambar_alur_acara" },
   { name: "gambar_timeline" },
 ]);
-const events = createLocalUploadMiddleware("events", [{ name: "thumbnail_url" }]);
+const events = createLocalUploadMiddleware("events", [
+  { name: "thumbnail_url" },
+  { name: "documentation_files" },
+]);
 const general = createLocalUploadMiddleware("general", [{ name: "file" }]);
 
 module.exports = {

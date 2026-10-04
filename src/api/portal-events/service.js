@@ -3,9 +3,27 @@ const schema = require("./schema");
 const validate = require("../../utilities/validation");
 const ResponseError = require("../../error/ResponseError");
 
+const formatEvent = (event) => {
+  if (!event) return event;
+  let docUrls = [];
+  if (Array.isArray(event.documentation_urls)) {
+    docUrls = event.documentation_urls;
+  } else if (typeof event.documentation_urls === "string") {
+    try {
+      docUrls = JSON.parse(event.documentation_urls);
+    } catch {
+      docUrls = [];
+    }
+  }
+  return {
+    ...event,
+    documentation_urls: Array.isArray(docUrls) ? docUrls : [],
+  };
+};
+
 const getEvents = async (role) => {
   const events = await repository.getEventsByRole(role || "all");
-  return events;
+  return (events || []).map(formatEvent);
 };
 
 const getEventDetail = async (eventId, studentId) => {
@@ -23,7 +41,7 @@ const getEventDetail = async (eventId, studentId) => {
   }
 
   return {
-    event,
+    event: formatEvent(event),
     mySubmission,
   };
 };
@@ -68,11 +86,13 @@ const reviewSubmission = async (submissionId, request) => {
 };
 
 const getPublicEvents = async () => {
-  return await repository.getAllPublicEvents();
+  const events = await repository.getAllPublicEvents();
+  return (events || []).map(formatEvent);
 };
 
 const adminGetEvents = async () => {
-  return await repository.getAllAdminEvents();
+  const events = await repository.getAllAdminEvents();
+  return (events || []).map(formatEvent);
 };
 
 const adminGetEventById = async (id) => {
@@ -80,14 +100,15 @@ const adminGetEventById = async (id) => {
   if (!event) {
     throw new ResponseError(404, "Event not found");
   }
-  return event;
+  return formatEvent(event);
 };
 
 const createEvent = async (data) => {
   if (!data.title) {
     throw new ResponseError(400, "Title is required");
   }
-  return await repository.createEvent(data);
+  const created = await repository.createEvent(data);
+  return formatEvent(created);
 };
 
 const updateEvent = async (id, data) => {
@@ -95,7 +116,8 @@ const updateEvent = async (id, data) => {
   if (!existing) {
     throw new ResponseError(404, "Event not found");
   }
-  return await repository.updateEvent(id, data);
+  const updated = await repository.updateEvent(id, data);
+  return formatEvent(updated);
 };
 
 const deleteEvent = async (id) => {

@@ -128,6 +128,40 @@ const adminGetEventById = async (req, res, next) => {
   }
 };
 
+const parseDocumentationUrls = (req) => {
+  let urls = [];
+  if (req.body.documentation_urls) {
+    if (Array.isArray(req.body.documentation_urls)) {
+      urls = [...req.body.documentation_urls];
+    } else if (typeof req.body.documentation_urls === "string") {
+      try {
+        const parsed = JSON.parse(req.body.documentation_urls);
+        if (Array.isArray(parsed)) {
+          urls = parsed;
+        } else if (parsed) {
+          urls = [parsed];
+        }
+      } catch {
+        if (req.body.documentation_urls.trim()) {
+          urls = [req.body.documentation_urls.trim()];
+        }
+      }
+    }
+  }
+
+  if (
+    req.files &&
+    req.files.documentation_files &&
+    req.files.documentation_files.length > 0
+  ) {
+    for (const file of req.files.documentation_files) {
+      if (file.path) urls.push(file.path);
+    }
+  }
+
+  return urls.filter((u) => typeof u === "string" && u.trim().length > 0);
+};
+
 const createEvent = async (req, res, next) => {
   try {
     let thumbnailUrl = null;
@@ -154,6 +188,7 @@ const createEvent = async (req, res, next) => {
       thumbnail_url: thumbnailUrl,
       target_role: req.body.target_role || "all",
       is_active: isActive,
+      documentation_urls: JSON.stringify(parseDocumentationUrls(req)),
     };
 
     const result = await service.createEvent(payload);
@@ -190,6 +225,13 @@ const updateEvent = async (req, res, next) => {
       payload.thumbnail_url = req.files.thumbnail_url[0].path;
     } else if (req.body.thumbnail_url !== undefined) {
       payload.thumbnail_url = req.body.thumbnail_url;
+    }
+
+    if (
+      req.body.documentation_urls !== undefined ||
+      (req.files && req.files.documentation_files && req.files.documentation_files.length > 0)
+    ) {
+      payload.documentation_urls = JSON.stringify(parseDocumentationUrls(req));
     }
 
     const result = await service.updateEvent(req.params.id, payload);
